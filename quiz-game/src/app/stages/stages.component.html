@@ -1,1 +1,8 @@
-<p>stages works!</p>
+<div class="container">
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let stage of stageWinningsArray()" [value]="stage">
+      {{ stage }}
+      <!-- {{ stage[0] }} - {{ stage[1] }} -->
+    </mat-list-option>
+  </mat-selection-list>
+</div>

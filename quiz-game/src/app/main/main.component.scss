@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+
+  .answer-btns {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
