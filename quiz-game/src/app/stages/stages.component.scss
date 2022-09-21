@@ -1,11 +1,9 @@
 .container {
   display: flex;
   flex: 1;
-
-  border: 1px solid black;
 }
 
 mat-list-option {
-  border: 1px solid black;
   height: 30px !important;
+  width: 125px !important;
 }

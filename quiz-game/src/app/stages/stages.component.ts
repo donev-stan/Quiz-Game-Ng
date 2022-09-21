@@ -28,10 +28,7 @@ export class StagesComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  stageWinningsArray(): any {
-    // console.log(Object.entries(this.gameStages));
+  stageWinningsArray() {
     return Object.values(this.gameStages).reverse();
-
-    return [];
   }
 }
