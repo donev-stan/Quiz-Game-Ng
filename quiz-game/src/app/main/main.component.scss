@@ -3,10 +3,20 @@
   flex: 2;
   flex-direction: column;
 
+  min-width: 550px;
+
+  mat-card {
+    font-size: larger;
+  }
+
   .answer-btns {
     margin-top: 20px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 20px;
+
+    button {
+      margin: 0px 10px 0 10px;
+    }
   }
 }
