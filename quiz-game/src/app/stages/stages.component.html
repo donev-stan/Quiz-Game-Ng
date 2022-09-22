@@ -2,7 +2,7 @@
   <mat-list>
     <mat-list-item role="listitem" [ngClass]="stageWinningsArray().length - i === 1 ? 'selected' : ''"
       *ngFor="let winnings of stageWinningsArray(); let i = index">
-      {{ stageWinningsArray().length - i }} | {{ winnings | currency : "$" : "symbol" : ".0" }}
+      {{ winnings | currency : "$" : "symbol" : ".0" }}
     </mat-list-item>
   </mat-list>
 </div>
