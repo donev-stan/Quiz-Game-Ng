@@ -1,5 +1,5 @@
-import { Injectable, SimpleChanges } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 
 import { FetchQuestionsService } from './fetch-questions.service';
 import { IQuestion } from './question';
@@ -14,6 +14,9 @@ export class QuestionsDataService {
 
   stage: number = 1;
   stageSubject: Subject<number> = new Subject();
+
+  hints: string[] = ['50/50', 'Friend', 'Audience'];
+  hintsSubject: Subject<string[]> = new Subject();
 
   gameStages: any = {
     1: 100,
@@ -43,6 +46,8 @@ export class QuestionsDataService {
       .subscribe((data: IQuestion[]) => {
         this.questions.push(...data);
         this.questionSubject.next(this.questions);
+
+        this.hintsSubject.next(this.hints);
         this.stageSubject.next(this.stage);
       });
   }
@@ -75,10 +80,51 @@ export class QuestionsDataService {
 
   reset(): void {
     this.questions = [];
+
+    this.hints = ['50/50', 'friend', 'audience'];
+    this.hintsSubject.next(this.hints);
+
     this.stage = 1;
     this.stageSubject.next(this.stage);
+
     this.fetchQuestionsService.resetDificultyStages();
     this.questionsSubscription.unsubscribe();
     this.questionsSubscription = this.subscribeToQuestions();
+  }
+
+  fiftyFiftyHint(): void {
+    if (!this.hints.includes('50/50')) return;
+    this.hints.splice(this.hints.indexOf('50/50'), 1);
+    this.hintsSubject.next(this.hints);
+
+    const current_question = this.questions[0];
+
+    while (current_question.answers.length > 2) {
+      const correct_answer_index = current_question.answers.indexOf(
+        current_question.correct_answer
+      );
+
+      const rndIndex = Math.floor(Math.random() * 4);
+
+      if (rndIndex !== correct_answer_index) {
+        current_question.answers.splice(rndIndex, 1);
+      }
+    }
+  }
+
+  friendHint(): void {
+    if (!this.hints.includes('Friend')) return;
+    this.hints.splice(this.hints.indexOf('Friend'), 1);
+    this.hintsSubject.next(this.hints);
+
+    const current_question = this.questions[0];
+  }
+
+  audienceHint(): void {
+    if (!this.hints.includes('Audience')) return;
+    this.hints.splice(this.hints.indexOf('Audience'), 1);
+    this.hintsSubject.next(this.hints);
+
+    const current_question = this.questions[0];
   }
 }

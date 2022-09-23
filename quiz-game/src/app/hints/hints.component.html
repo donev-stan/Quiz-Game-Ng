@@ -1,5 +1,28 @@
-<div class="container">
-  <button mat-raised-button color="primary">50/50</button>
-  <button mat-raised-button color="primary">Audience</button>
-  <button mat-raised-button color="warn">Friend</button>
-</div>
+<mat-card>
+  <div class="container">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="activateHint('50/50', btn50)"
+      #btn50
+    >
+      50/50
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="activateHint('audience', btnAudience)"
+      #btnAudience
+    >
+      Audience
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="activateHint('friend', btnFriend)"
+      #btnFriend
+    >
+      Friend
+    </button>
+  </div>
+</mat-card>
