@@ -9,6 +9,7 @@ import { HintsComponent } from './hints/hints.component';
 import { StagesComponent } from './stages/stages.component';
 import { MaterialModule } from './shared/material.module';
 import { EndGameDialogComponent } from './shared/modal/end-game-dialog.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { EndGameDialogComponent } from './shared/modal/end-game-dialog.component
     HintsComponent,
     StagesComponent,
     EndGameDialogComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
