@@ -1,8 +1,18 @@
 <div class="container" [class.mat-elevation-z2]="true">
   <mat-list>
-    <mat-list-item role="listitem" [ngClass]="stageWinningsArray().length - i === 1 ? 'selected' : ''"
-      *ngFor="let winnings of stageWinningsArray(); let i = index">
-      {{ winnings | currency : "$" : "symbol" : ".0" }}
+    <!-- <mat-list-item
+      *ngFor="let winnings of stageWinningsArray(); let i = index"
+      currentStage
+      [stageIndex]="15 - i"
+    >
+      {{ winnings | currency: "":"symbol":".0" }}
+    </mat-list-item> -->
+
+    <mat-list-item
+      *ngFor="let winnings of stageWinningsArrayE()"
+      [ngClass]="{ selected: currentStage === +winnings[0] }"
+    >
+      {{ winnings[1] | currency: "$":"symbol":".0" }}
     </mat-list-item>
   </mat-list>
 </div>

@@ -1,43 +1,44 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { Injectable, SimpleChanges } from '@angular/core';
+import { Observable, Subject, Subscription } from 'rxjs';
+
+import { FetchQuestionsService } from './fetch-questions.service';
+import { IQuestion } from './question';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuestionsDataService {
-  private BASE_URL = 'https://opentdb.com/api.php';
+  questions: IQuestion[] = [];
+  questionSubject: Subject<IQuestion[]> = new Subject();
+  questionsSubscription: Subscription;
 
-  private questionsDifficulty: string[] = ['easy', 'medium', 'hard'];
+  stage: number = 1;
+  stageSubject: Subject<number> = new Subject();
 
-  constructor(private http: HttpClient) {}
-
-  shiftQuestionDifficulty(): void {
-    this.questionsDifficulty.shift();
+  constructor(private fetchQuestionsService: FetchQuestionsService) {
+    this.questionsSubscription = this.subscribeToQuestions();
   }
 
-  getQuestions(): Observable<any> {
-    return this.http
-      .get<any>(
-        `${this.BASE_URL}?amount=5&difficulty=${this.questionsDifficulty[0]}&type=multiple`
-      )
-      .pipe(
-        tap((data) => console.log(data.results)),
-        map((data) => data.results),
-        catchError(this.handleError)
-      );
+  subscribeToQuestions(): Subscription {
+    return this.fetchQuestionsService
+      .fetchQuestions()
+      .subscribe((data: IQuestion[]) => {
+        this.questions.push(...data);
+        this.questionSubject.next(this.questions);
+        this.stageSubject.next(this.stage);
+      });
   }
 
-  private handleError(err: HttpErrorResponse) {
-    let errorMessage = '';
+  nextStage(): void {
+    if (this.stage === 15) return;
 
-    if (err.error instanceof ErrorEvent) {
-      errorMessage = `An error occurred: ${err.error.message}`;
-    } else {
-      errorMessage = `Server returned code: ${err.status}, error message is ${err.message}`;
+    this.stage++;
+    this.stageSubject.next(this.stage);
+    this.questions.shift();
+
+    if (this.stage === 4 || this.stage === 9) {
+      this.questionsSubscription.unsubscribe();
+      this.questionsSubscription = this.subscribeToQuestions();
     }
-
-    console.error(errorMessage);
-    return throwError(() => errorMessage);
   }
 }

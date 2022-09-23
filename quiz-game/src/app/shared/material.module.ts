@@ -5,10 +5,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
-  exports: [MatButtonModule, MatIconModule, MatCardModule, MatListModule],
+  exports: [
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatListModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+  ],
 })
 export class MaterialModule {}

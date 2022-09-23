@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IQuestion } from '../shared/question';
 import { QuestionsDataService } from '../shared/questions-data.service';
 
 @Component({
@@ -7,11 +8,32 @@ import { QuestionsDataService } from '../shared/questions-data.service';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
+  questions!: IQuestion[];
+
+  disabledBtns: boolean = false;
+
   constructor(private questionsService: QuestionsDataService) {}
 
   ngOnInit(): void {
-    this.questionsService.getQuestions().subscribe((questions) => {
-      console.log(questions);
-    });
+    this.questionsService.questionSubject.subscribe(
+      (questions: IQuestion[]) => {
+        this.questions = questions;
+      }
+    );
+  }
+
+  checkAnswer(answer: string, btn: any): void {
+    // this.disabledBtns = true;
+
+    const correctIsClicked = answer === this.questions[0].correct_answer;
+
+    this.questionsService.nextStage();
+
+    if (correctIsClicked) {
+      // this.questionsService.nextStage();
+    }
+
+    // this.disabledBtns = false;
+    console.log(this.questions);
   }
 }

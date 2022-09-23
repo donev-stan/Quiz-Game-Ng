@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuestionsDataService } from '../shared/questions-data.service';
 
 @Component({
   selector: 'app-stages',
@@ -24,11 +25,21 @@ export class StagesComponent implements OnInit {
     15: 100000,
   };
 
-  constructor() {}
+  currentStage: number = 1;
 
-  ngOnInit(): void {}
+  constructor(private questionService: QuestionsDataService) {}
+
+  ngOnInit(): void {
+    this.questionService.stageSubject.subscribe((stage) => {
+      this.currentStage = stage;
+    });
+  }
 
   stageWinningsArray() {
     return Object.values(this.gameStages).reverse();
+  }
+
+  stageWinningsArrayE() {
+    return Object.entries(this.gameStages).reverse();
   }
 }

@@ -9,6 +9,10 @@
     font-size: larger;
   }
 
+  .loader-div {
+    margin: 50px 0;
+  }
+
   .answer-btns {
     margin-top: 20px;
     display: flex;
@@ -17,6 +21,10 @@
 
     button {
       margin: 0px 10px 0 10px;
+
+      // &:disabled {
+
+      // }
     }
   }
 }

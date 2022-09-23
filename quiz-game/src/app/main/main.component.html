@@ -1,9 +1,39 @@
 <div class="container">
-  <mat-card>Question is going to be loaded here????</mat-card>
-  <div class="answer-btns">
-    <button mat-raised-button>Answer On The Question</button>
-    <button mat-raised-button>Answer On The Question</button>
-    <button mat-raised-button>Answer On The Question</button>
-    <button mat-raised-button>Answer On The Question</button>
+  <div *ngIf="questions">
+    <mat-card [innerHTML]="questions[0].question"></mat-card>
+    <div class="answer-btns">
+      <button
+        #btn_option1
+        mat-raised-button
+        (click)="checkAnswer(questions[0].answers[0], btn_option1)"
+        [innerHTML]="questions[0].answers[0]"
+        [disabled]="disabledBtns"
+      ></button>
+      <button
+        #btn_option2
+        mat-raised-button
+        (click)="checkAnswer(questions[0].answers[1], btn_option2)"
+        [innerHTML]="questions[0].answers[1]"
+        [disabled]="disabledBtns"
+      ></button>
+      <button
+        #btn_option3
+        mat-raised-button
+        (click)="checkAnswer(questions[0].answers[2], btn_option3)"
+        [innerHTML]="questions[0].answers[2]"
+        [disabled]="disabledBtns"
+      ></button>
+      <button
+        #btn_option4
+        mat-raised-button
+        (click)="checkAnswer(questions[0].answers[3], btn_option4)"
+        [innerHTML]="questions[0].answers[3]"
+        [disabled]="disabledBtns"
+      ></button>
+    </div>
+  </div>
+  <div class="loader-div" *ngIf="!questions">
+    <!-- <mat-spinner></mat-spinner> -->
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
 </div>
