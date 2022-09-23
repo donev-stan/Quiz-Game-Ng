@@ -17,11 +17,7 @@ export class StagesComponent implements OnInit {
     });
   }
 
-  // stageWinningsArray() {
-  //  return Object.values(this.questionService.gameStages).reverse();
-  // }
-
-  stageWinningsArrayE() {
+  stageWinningsArray(): any {
     return Object.entries(this.questionService.gameStages).reverse();
   }
 }

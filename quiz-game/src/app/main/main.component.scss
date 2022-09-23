@@ -21,10 +21,11 @@
 
     button {
       margin: 0px 10px 0 10px;
-
-      // &:disabled {
-
-      // }
     }
   }
+}
+
+.mat-success {
+  background-color: #689f38;
+  color: #fff;
 }

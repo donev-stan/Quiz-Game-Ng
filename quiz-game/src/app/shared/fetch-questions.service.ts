@@ -27,7 +27,7 @@ export class FetchQuestionsService {
         `${this.BASE_URL}?amount=5&difficulty=${this.questionsDifficulty[0]}&type=multiple`
       )
       .pipe(
-        tap((data) => console.log(data.results)),
+        // tap((data) => console.log(data.results)),
         map((data) => {
           return data.results.map((questionData: any) => ({
             question: questionData.question,

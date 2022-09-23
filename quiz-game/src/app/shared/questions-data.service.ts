@@ -80,6 +80,7 @@ export class QuestionsDataService {
 
   reset(): void {
     this.questions = [];
+    this.questionSubject.next(this.questions);
 
     this.hints = ['50/50', 'Friend', 'Audience'];
     this.hintsSubject.next(this.hints);

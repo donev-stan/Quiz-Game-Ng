@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { HintsComponent } from './hints/hints.component';
 import { StagesComponent } from './stages/stages.component';
-import { StageDirective } from './stages/stage.directive';
 import { MaterialModule } from './shared/material.module';
 import { EndGameDialogComponent } from './shared/modal/end-game-dialog.component';
 
@@ -18,7 +17,6 @@ import { EndGameDialogComponent } from './shared/modal/end-game-dialog.component
     HintsComponent,
     StagesComponent,
     EndGameDialogComponent,
-    StageDirective,
   ],
   imports: [
     BrowserModule,

@@ -11,9 +11,8 @@ import { QuestionsDataService } from '../shared/questions-data.service';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  questions!: IQuestion[];
-
-  disabledBtns: boolean = false;
+  questions: IQuestion[] = [];
+  answersClicked: number = 1;
 
   constructor(
     private questionsService: QuestionsDataService,
@@ -24,18 +23,20 @@ export class MainComponent implements OnInit {
     this.questionsService.questionSubject.subscribe(
       (questions: IQuestion[]) => {
         this.questions = questions;
-        console.log(this.questions[0].correct_answer);
+        console.log(`Correct Answer: \n ${this.questions[0]?.correct_answer}`);
       }
     );
   }
 
   checkAnswer(answer: string, btn: any): void {
-    this.disabledBtns = true;
+    if (this.answersClicked !== this.questionsService.stage) return;
+    this.answersClicked++;
 
     const correctIsClicked = answer === this.questions[0].correct_answer;
 
     if (correctIsClicked) {
-      this.questionsService.getWinnings();
+      btn.color = 'success';
+
       if (this.questionsService.stage === 15) {
         this.openDialog({
           title: 'Congratulations!',
@@ -44,18 +45,22 @@ export class MainComponent implements OnInit {
         });
       }
 
-      this.questionsService.nextStage();
+      setTimeout(() => {
+        this.questionsService.nextStage();
+        btn.color = '';
 
-      console.log(this.questions[0].correct_answer);
+        console.log(`Correct Answer: \n ${this.questions[0]?.correct_answer}`);
+      }, 500);
     } else {
+      btn.color = 'warn';
+      this.answersClicked = 1;
+
       this.openDialog({
         title: 'Game Over',
         text: 'Sorry, wrong answer.',
         winnings: this.questionsService.getWinnings(),
       });
     }
-
-    this.disabledBtns = false;
   }
 
   openDialog(data: IDialogData) {
