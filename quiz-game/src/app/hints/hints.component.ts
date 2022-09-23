@@ -1,4 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 import { QuestionsDataService } from '../shared/questions-data.service';
 
 @Component({
@@ -6,10 +13,12 @@ import { QuestionsDataService } from '../shared/questions-data.service';
   templateUrl: './hints.component.html',
   styleUrls: ['./hints.component.scss'],
 })
-export class HintsComponent implements OnInit {
-  // @ViewChild('btn50/50') fiftyFiftyBtn: ElementRef;
-
+export class HintsComponent implements OnInit, AfterViewInit {
   availableHints: string[] = [];
+
+  @ViewChild('btn50') fiftyFiftyBtn: any;
+  @ViewChild('btnAudience') audienceBtn: any;
+  @ViewChild('btnFriend') friendBtn: any;
 
   constructor(private questionService: QuestionsDataService) {}
 
@@ -17,10 +26,18 @@ export class HintsComponent implements OnInit {
     this.questionService.hintsSubject.subscribe((hints: string[]) => {
       this.availableHints = hints;
       console.log(this.availableHints);
+
+      this.setHintBtnColors();
     });
   }
 
-  activateHint(hint: string, btn: any) {
+  ngAfterViewInit(): void {
+    console.log(this.fiftyFiftyBtn);
+    console.log(this.audienceBtn);
+    console.log(this.friendBtn);
+  }
+
+  activateHint(hint: string, btn: MatButton) {
     switch (hint) {
       case '50/50':
         this.questionService.fiftyFiftyHint();
@@ -40,5 +57,19 @@ export class HintsComponent implements OnInit {
 
         break;
     }
+  }
+
+  setHintBtnColors(): void {
+    if (this.availableHints.includes('50/50'))
+      this.fiftyFiftyBtn.color = 'primary';
+
+    if (this.availableHints.includes('Audience')) {
+      console.log('HERE!!!');
+
+      this.audienceBtn.color = 'primary';
+    }
+
+    if (this.availableHints.includes('Friend'))
+      this.friendBtn.color = 'primary';
   }
 }

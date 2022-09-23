@@ -81,7 +81,7 @@ export class QuestionsDataService {
   reset(): void {
     this.questions = [];
 
-    this.hints = ['50/50', 'friend', 'audience'];
+    this.hints = ['50/50', 'Friend', 'Audience'];
     this.hintsSubject.next(this.hints);
 
     this.stage = 1;
