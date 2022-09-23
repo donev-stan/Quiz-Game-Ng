@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { IQuestion } from './question';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,11 @@ export class FetchQuestionsService {
     this.questionsDifficulty.shift();
   }
 
-  fetchQuestions(): Observable<any> {
+  resetDificultyStages(): void {
+    this.questionsDifficulty = ['easy', 'medium', 'hard'];
+  }
+
+  fetchQuestions(): Observable<IQuestion[]> {
     return this.http
       .get<any>(
         `${this.BASE_URL}?amount=5&difficulty=${this.questionsDifficulty[0]}&type=multiple`

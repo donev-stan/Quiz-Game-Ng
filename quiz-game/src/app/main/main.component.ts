@@ -1,4 +1,7 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
+import { IDialogData } from '../shared/dialogData';
+import { EndGameDialogComponent } from '../shared/modal/end-game-dialog.component';
 import { IQuestion } from '../shared/question';
 import { QuestionsDataService } from '../shared/questions-data.service';
 
@@ -12,28 +15,53 @@ export class MainComponent implements OnInit {
 
   disabledBtns: boolean = false;
 
-  constructor(private questionsService: QuestionsDataService) {}
+  constructor(
+    private questionsService: QuestionsDataService,
+    public dialog: Dialog
+  ) {}
 
   ngOnInit(): void {
     this.questionsService.questionSubject.subscribe(
       (questions: IQuestion[]) => {
         this.questions = questions;
+        console.log(this.questions[0].correct_answer);
       }
     );
   }
 
   checkAnswer(answer: string, btn: any): void {
-    // this.disabledBtns = true;
+    this.disabledBtns = true;
 
     const correctIsClicked = answer === this.questions[0].correct_answer;
 
-    this.questionsService.nextStage();
-
     if (correctIsClicked) {
-      // this.questionsService.nextStage();
+      this.questionsService.getWinnings();
+      if (this.questionsService.stage === 15) {
+        this.openDialog({
+          title: 'Congratulations!',
+          text: 'You won the top price.',
+          winnings: this.questionsService.getWinnings(),
+        });
+      }
+
+      this.questionsService.nextStage();
+
+      console.log(this.questions[0].correct_answer);
+    } else {
+      this.openDialog({
+        title: 'Game Over',
+        text: 'Sorry, wrong answer.',
+        winnings: this.questionsService.getWinnings(),
+      });
     }
 
-    // this.disabledBtns = false;
-    console.log(this.questions);
+    this.disabledBtns = false;
+  }
+
+  openDialog(data: IDialogData) {
+    this.dialog.open(EndGameDialogComponent, {
+      disableClose: true,
+      data,
+    });
   }
 }

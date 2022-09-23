@@ -12,7 +12,7 @@
       *ngFor="let winnings of stageWinningsArrayE()"
       [ngClass]="{ selected: currentStage === +winnings[0] }"
     >
-      {{ winnings[1] | currency: "$":"symbol":".0" }}
+      ${{ winnings[1] }}
     </mat-list-item>
   </mat-list>
 </div>

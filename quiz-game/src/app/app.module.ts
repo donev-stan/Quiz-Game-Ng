@@ -9,13 +9,15 @@ import { HintsComponent } from './hints/hints.component';
 import { StagesComponent } from './stages/stages.component';
 import { StageDirective } from './stages/stage.directive';
 import { MaterialModule } from './shared/material.module';
+import { EndGameDialogComponent } from './shared/modal/end-game-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MainComponent,
     HintsComponent,
     StagesComponent,
-    MainComponent,
+    EndGameDialogComponent,
     StageDirective,
   ],
   imports: [

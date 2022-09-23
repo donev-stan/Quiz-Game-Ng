@@ -7,24 +7,6 @@ import { QuestionsDataService } from '../shared/questions-data.service';
   styleUrls: ['./stages.component.scss'],
 })
 export class StagesComponent implements OnInit {
-  gameStages = {
-    1: 100,
-    2: 200,
-    3: 300,
-    4: 400,
-    5: 500,
-    6: 1000,
-    7: 1500,
-    8: 2000,
-    9: 3000,
-    10: 5000,
-    11: 10000,
-    12: 20000,
-    13: 30000,
-    14: 50000,
-    15: 100000,
-  };
-
   currentStage: number = 1;
 
   constructor(private questionService: QuestionsDataService) {}
@@ -35,11 +17,11 @@ export class StagesComponent implements OnInit {
     });
   }
 
-  stageWinningsArray() {
-    return Object.values(this.gameStages).reverse();
-  }
+  // stageWinningsArray() {
+  //  return Object.values(this.questionService.gameStages).reverse();
+  // }
 
   stageWinningsArrayE() {
-    return Object.entries(this.gameStages).reverse();
+    return Object.entries(this.questionService.gameStages).reverse();
   }
 }
