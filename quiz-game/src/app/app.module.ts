@@ -10,6 +10,8 @@ import { StagesComponent } from './stages/stages.component';
 import { MaterialModule } from './shared/material.module';
 import { EndGameDialogComponent } from './shared/modal/end-game-dialog.component';
 import { HeaderComponent } from './header/header.component';
+import { TimerComponent } from './timer/timer.component';
+import { TimerAndHintsComponent } from './quiz-game/timer-and-hints/timer-and-hints.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { HeaderComponent } from './header/header.component';
     StagesComponent,
     EndGameDialogComponent,
     HeaderComponent,
+    TimerComponent,
+    TimerAndHintsComponent,
   ],
   imports: [
     BrowserModule,
