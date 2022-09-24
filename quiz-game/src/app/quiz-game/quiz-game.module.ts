@@ -7,6 +7,7 @@ import { TimerAndHintsComponent } from './timer-and-hints/timer-and-hints.compon
 import { QuestionComponent } from './question/question.component';
 import { StagesComponent } from './stages/stages.component';
 import { GameOverDialogComponent } from './game-over-dialog/game-over-dialog.component';
+import { MaterialModule } from '../shared/material.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,6 @@ import { GameOverDialogComponent } from './game-over-dialog/game-over-dialog.com
     StagesComponent,
     GameOverDialogComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, MaterialModule],
 })
 export class QuizGameModule {}

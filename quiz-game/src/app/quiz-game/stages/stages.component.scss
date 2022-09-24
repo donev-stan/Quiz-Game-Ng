@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex: 1;
+
+  border-radius: 8px;
+  background: white;
+  padding: 0 40px 10px;
+}
+
+mat-list-item {
+  height: 35px !important;
+  display: flex !important;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.selected {
+  color: white;
+  background: orange;
+}

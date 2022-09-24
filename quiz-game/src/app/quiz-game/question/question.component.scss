@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+
+  min-width: 550px;
+
+  mat-card {
+    font-size: larger;
+  }
+
+  .loader-div {
+    margin: 50px 0;
+  }
+
+  .answer-btns {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    button {
+      margin: 0px 10px 0 10px;
+    }
+  }
+}
+
+.mat-success {
+  background-color: #689f38;
+  color: #fff;
+}

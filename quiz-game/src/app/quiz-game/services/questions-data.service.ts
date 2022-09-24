@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
+import { IQuestion } from '../question/question';
 
 import { FetchQuestionsService } from './fetch-questions.service';
-import { IQuestion } from './question';
 
 @Injectable({
   providedIn: 'root',
