@@ -10,7 +10,7 @@ import { FetchQuestionsService } from './fetch-questions.service';
 export class QuestionsDataService {
   questions: IQuestion[] = [];
   questionSubject: Subject<IQuestion[]> = new Subject();
-  questionsSubscription: Subscription;
+  questionsSubscription!: Subscription;
 
   stage: number = 1;
   stageSubject: Subject<number> = new Subject();
@@ -37,6 +37,10 @@ export class QuestionsDataService {
   };
 
   constructor(private fetchQuestionsService: FetchQuestionsService) {
+    this.createSubscription();
+  }
+
+  createSubscription(): void {
     this.questionsSubscription = this.subscribeToQuestions();
   }
 
@@ -49,6 +53,8 @@ export class QuestionsDataService {
 
         this.hintsSubject.next(this.hints);
         this.stageSubject.next(this.stage);
+
+        this.fetchQuestionsService.shiftQuestionDifficulty();
       });
   }
 
@@ -91,6 +97,19 @@ export class QuestionsDataService {
     this.fetchQuestionsService.resetDificultyStages();
     this.questionsSubscription.unsubscribe();
     this.questionsSubscription = this.subscribeToQuestions();
+  }
+
+  terminate(): void {
+    this.questions = [];
+
+    this.hints = ['50/50', 'Friend', 'Audience'];
+    this.hintsSubject.next(this.hints);
+
+    this.stage = 1;
+    this.stageSubject.next(this.stage);
+
+    this.fetchQuestionsService.resetDificultyStages();
+    this.questionsSubscription.unsubscribe();
   }
 
   fiftyFiftyHint(): void {

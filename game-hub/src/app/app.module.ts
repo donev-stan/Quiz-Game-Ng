@@ -9,16 +9,24 @@ import { HeaderComponent } from './header/header.component';
 import { QuizGameModule } from './quiz-game/quiz-game.module';
 import { HomeComponent } from './home/home.component';
 import { RoutingModule } from './routing.module';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RoutingModule,
     MaterialModule,
     HttpClientModule,
-    // QuizGameModule,
+    QuizGameModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

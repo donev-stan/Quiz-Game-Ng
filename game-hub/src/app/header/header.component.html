@@ -3,5 +3,22 @@
         <!-- <mat-icon>games</mat-icon> -->
         <mat-icon>videogame_asset</mat-icon>
     </button>
+
     <span>Games Hub</span>
+
+    <span class="spacer"></span>
+
+    <a mat-button routerLink="/home">Dashboard</a>
+    <a mat-button routerLink="/scoreboard">Scoreboard</a>
+    <button mat-button [matMenuTriggerFor]="menu">Games</button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/quiz-game">Quiz</button>
+        <button mat-menu-item>Hangman</button>
+        <button mat-menu-item>TicTacToe</button>
+    </mat-menu>
+
+    <span class="spacer"></span>
+
+    <a mat-button routerLink="/login">Login</a>
+    <a mat-raised-button routerLink="/register">Register</a>
 </mat-toolbar>

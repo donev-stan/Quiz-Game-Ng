@@ -1,5 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { IDialogData } from '../game-over-dialog/dialogData';
 import { GameOverDialogComponent } from '../game-over-dialog/game-over-dialog.component';
 import { QuestionsDataService } from '../services/questions-data.service';
@@ -10,9 +11,11 @@ import { IQuestion } from './question';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss'],
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements OnInit, OnDestroy {
   questions: IQuestion[] = [];
   answersClicked: number = 1;
+
+  questionsSubscription: Subscription = new Subscription();
 
   constructor(
     private questionsService: QuestionsDataService,
@@ -20,12 +23,22 @@ export class QuestionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.questionsService.questionSubject.subscribe(
-      (questions: IQuestion[]) => {
-        this.questions = questions;
-        console.log(`Correct Answer: \n ${this.questions[0]?.correct_answer}`);
-      }
-    );
+    this.questionsService.createSubscription();
+
+    this.questionsSubscription =
+      this.questionsService.questionSubject.subscribe(
+        (questions: IQuestion[]) => {
+          this.questions = questions;
+          console.log(
+            `Correct Answer: \n ${this.questions[0]?.correct_answer}`
+          );
+        }
+      );
+  }
+
+  ngOnDestroy(): void {
+    this.questionsSubscription.unsubscribe();
+    this.questionsService.terminate();
   }
 
   checkAnswer(answer: string, btn: any): void {
