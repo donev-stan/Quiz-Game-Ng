@@ -1,4 +1,4 @@
-<div class="container" [class.mat-elevation-z2]="true">
+<div class="container unselectable" [class.mat-elevation-z2]="true">
     <h1 mat-dialog-title>{{ data.title }}</h1>
     <div mat-dialog-content>
         <p style="font-size: larger" [innerHTML]="data.text"></p>
@@ -10,9 +10,9 @@
         </p>
 
         <p *ngIf="data.winnings">
-            <b>Winnings:</b> &nbsp;
-            <span style="color: orange">
-                {{ data.winnings | currency : "$" : "symbol" : ".0" }}
+            Winnings: &nbsp;
+            <span class="winnings-text">
+                <b> {{ data.winnings | currency : "$" : "symbol" : ".0" }} </b>
             </span>
         </p>
     </div>

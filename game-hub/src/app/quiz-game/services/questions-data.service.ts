@@ -65,7 +65,7 @@ export class QuestionsDataService {
   startTimer(): void {
     if (this.timerSubscription) this.destroyTimer();
 
-    this.timerValue = 30;
+    this.timerValue = 60;
     this.timerSubscription = interval(1000).subscribe((time) => {
       if (this.timerValue === 0) {
         this.destroyTimer();
