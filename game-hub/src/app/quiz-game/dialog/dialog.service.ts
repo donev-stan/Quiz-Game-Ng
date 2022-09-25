@@ -7,9 +7,14 @@ import { IDialogData } from './dialogData';
   providedIn: 'root',
 })
 export class DialogService {
-  constructor(private dialog: Dialog) {}
+  constructor(public dialog: Dialog) {}
 
-  openDialog(dialogData: IDialogData) {
-    this.dialog.open(DialogComponent, { disableClose: true, data: dialogData });
+  openDialog(dialogData: IDialogData): any {
+    this.dialog.closeAll();
+
+    this.dialog.open(DialogComponent, {
+      disableClose: true,
+      data: dialogData,
+    });
   }
 }

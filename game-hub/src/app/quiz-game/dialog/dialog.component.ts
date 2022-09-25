@@ -18,7 +18,7 @@ export class DialogComponent {
   ) {}
 
   btnClick(exitGame: boolean, reset: boolean) {
-    this.dialogRef.close();
+    this.dialogRef.close({ data: 'asdasdasdasdsrgdesbsdftgsd' });
 
     if (exitGame) {
       this.router.navigate(['/home']);
