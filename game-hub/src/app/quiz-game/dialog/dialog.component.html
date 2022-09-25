@@ -1,0 +1,29 @@
+<div class="container" [class.mat-elevation-z2]="true">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <div mat-dialog-content>
+        <p style="font-size: larger" [innerHTML]="data.text"></p>
+
+        <p *ngIf="data.audienceResponse">
+            <span *ngFor="let pair of audienceResponseArray(data.audienceResponse)">
+                <b> {{ pair[1] }}% </b> -- <i> {{ pair[0] }} </i> <br>
+            </span>
+        </p>
+
+        <p *ngIf="data.winnings">
+            <b>Winnings:</b> &nbsp;
+            <span style="color: orange">
+                {{ data.winnings | currency : "$" : "symbol" : ".0" }}
+            </span>
+        </p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button *ngIf="data.actions.secondary"
+            (click)="btnClick(data.actions.secondary.exitGame, data.actions.secondary.reset)">{{
+            data.actions.secondary.text
+            }}</button>
+        <button mat-raised-button color="primary"
+            (click)="btnClick(data.actions.main.exitGame, data.actions.main.reset)">
+            {{ data.actions.main.text }}
+        </button>
+    </div>
+</div>

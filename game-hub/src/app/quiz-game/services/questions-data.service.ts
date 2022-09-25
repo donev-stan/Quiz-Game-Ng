@@ -131,17 +131,54 @@ export class QuestionsDataService {
     }
   }
 
-  friendHint(): void {
+  friendHint(): string | null {
     const canUse = this.canUseHint('Friend');
-    if (!canUse) return;
+    if (!canUse) return null;
 
     const current_question = this.questions[0];
+
+    const giveCorrectAnswer = Math.random() < 0.75;
+
+    let answer = '';
+
+    if (giveCorrectAnswer) {
+      answer = `I'm pretty sure that it's <b> ${current_question.correct_answer} </b>`;
+    } else {
+      let choise = '';
+
+      do {
+        choise =
+          current_question.answers[
+            Math.floor(Math.random() * current_question.answers.length)
+          ];
+
+        answer = `I'm pretty sure that it's <b> ${choise} </b>`;
+      } while (choise === current_question.correct_answer);
+    }
+
+    return answer;
   }
 
-  audienceHint(): void {
+  audienceHint(): object | null {
     const canUse = this.canUseHint('Audience');
-    if (!canUse) return;
+    if (!canUse) return null;
 
     const current_question = this.questions[0];
+
+    const audiencePercentage = current_question.answers.reduce(
+      (objCreated: any, key: any) => ({ ...objCreated, [key]: 0 }),
+      {}
+    );
+
+    audiencePercentage[current_question.correct_answer] = 50;
+
+    for (let i = 0; i < 50; i++) {
+      let rndIndex = Math.floor(
+        Math.random() * current_question.answers.length
+      );
+      audiencePercentage[current_question.answers[rndIndex]] += 1;
+    }
+
+    return audiencePercentage;
   }
 }

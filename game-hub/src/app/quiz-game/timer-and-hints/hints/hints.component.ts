@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { DialogService } from '../../dialog/dialog.service';
 import { QuestionsDataService } from '../../services/questions-data.service';
 
 @Component({
@@ -14,7 +14,10 @@ export class HintsComponent implements OnInit {
   @ViewChild('btnAudience') audienceBtn: any;
   @ViewChild('btnFriend') friendBtn: any;
 
-  constructor(private questionService: QuestionsDataService) {}
+  constructor(
+    private questionService: QuestionsDataService,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit(): void {
     this.questionService.hintsSubject.subscribe((hints: string[]) => {
@@ -29,33 +32,63 @@ export class HintsComponent implements OnInit {
     // console.log(this.friendBtn);
   }
 
-  activateHint(hint: string, btn: MatButton) {
+  activateHint(hint: string) {
     switch (hint) {
-      case '50/50':
+      case '50/50': {
         this.questionService.fiftyFiftyHint();
-        btn.color = 'warn';
         break;
+      }
 
-      case 'audience':
-        this.questionService.audienceHint();
-        btn.color = 'warn';
+      case 'Audience': {
+        const response = this.questionService.audienceHint();
+        if (response) {
+          this.dialogService.openDialog({
+            title: 'Ask The Audience',
+            text: `<hr>`,
+            audienceResponse: response,
+            actions: {
+              main: {
+                exitGame: false,
+                reset: false,
+                text: 'Thanks!',
+              },
+            },
+          });
+        }
         break;
+      }
 
-      case 'friend':
-        this.questionService.friendHint();
-        btn.color = 'warn';
+      case 'Friend': {
+        const response = this.questionService.friendHint();
+        if (response) {
+          this.dialogService.openDialog({
+            title: 'Call A Friend',
+            text: response.toString(),
+            actions: {
+              main: {
+                exitGame: false,
+                reset: false,
+                text: 'Thanks!',
+              },
+            },
+          });
+        }
         break;
+      }
     }
   }
 
   setHintBtnColors(): void {
-    if (this.availableHints.includes('50/50'))
-      this.fiftyFiftyBtn.color = 'primary';
+    this.availableHints.includes('50/50')
+      ? (this.fiftyFiftyBtn.color = 'primary')
+      : (this.fiftyFiftyBtn.color = 'warn');
 
-    if (this.availableHints.includes('Audience'))
-      this.audienceBtn.color = 'primary';
+    this.availableHints.includes('Audience')
+      ? (this.audienceBtn.color = 'primary')
+      : (this.audienceBtn.color = 'warn');
 
-    if (this.availableHints.includes('Friend'))
-      this.friendBtn.color = 'primary';
+    this.availableHints.includes('Friend')
+      ? (this.friendBtn.color = 'primary')
+      : (this.friendBtn.color = 'warn');
   }
 }

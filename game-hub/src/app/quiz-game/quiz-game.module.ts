@@ -6,9 +6,9 @@ import { HintsComponent } from './timer-and-hints/hints/hints.component';
 import { TimerAndHintsComponent } from './timer-and-hints/timer-and-hints.component';
 import { QuestionComponent } from './question/question.component';
 import { StagesComponent } from './stages/stages.component';
-import { GameOverDialogComponent } from './game-over-dialog/game-over-dialog.component';
 import { MaterialModule } from '../shared/material.module';
 import { RoutingModule } from '../routing.module';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { RoutingModule } from '../routing.module';
     TimerAndHintsComponent,
     QuestionComponent,
     StagesComponent,
-    GameOverDialogComponent,
+    DialogComponent,
   ],
   imports: [CommonModule, MaterialModule, RoutingModule],
 })

@@ -5,25 +5,31 @@ import { QuestionsDataService } from '../services/questions-data.service';
 import { IDialogData } from './dialogData';
 
 @Component({
-  selector: 'app-game-over-dialog',
-  templateUrl: './game-over-dialog.component.html',
-  styleUrls: ['./game-over-dialog.component.scss'],
+  selector: 'app-dialog',
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./dialog.component.scss'],
 })
-export class GameOverDialogComponent {
+export class DialogComponent {
   constructor(
     public dialogRef: DialogRef,
     @Inject(DIALOG_DATA) public data: IDialogData,
     private questionService: QuestionsDataService,
     private router: Router
-  ) {}
+  ) {
+    console.log(data.audienceResponse);
+  }
 
-  btnAction(exitGame: boolean) {
+  btnClick(exitGame: boolean, reset: boolean) {
     this.dialogRef.close();
 
     if (exitGame) {
       this.router.navigate(['/home']);
-    } else {
+    } else if (reset) {
       this.questionService.reset();
     }
+  }
+
+  audienceResponseArray(data: any): any {
+    return Object.entries(data);
   }
 }

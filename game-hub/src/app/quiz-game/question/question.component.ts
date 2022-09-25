@@ -1,8 +1,6 @@
-import { Dialog } from '@angular/cdk/dialog';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { IDialogData } from '../game-over-dialog/dialogData';
-import { GameOverDialogComponent } from '../game-over-dialog/game-over-dialog.component';
+import { DialogService } from '../dialog/dialog.service';
 import { QuestionsDataService } from '../services/questions-data.service';
 import { IQuestion } from './question';
 
@@ -19,7 +17,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
   constructor(
     private questionsService: QuestionsDataService,
-    public dialog: Dialog
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -51,13 +49,21 @@ export class QuestionComponent implements OnInit, OnDestroy {
       btn.color = 'success';
 
       if (this.questionsService.stage === 15) {
-        this.openDialog({
+        this.dialogService.openDialog({
           title: 'Congratulations!',
           text: 'You won the top price.',
           winnings: this.questionsService.getWinnings(),
-          action: {
-            exitGame: false,
-            text: 'Start Over',
+          actions: {
+            main: {
+              exitGame: false,
+              reset: true,
+              text: 'Start Over',
+            },
+            secondary: {
+              exitGame: true,
+              reset: false,
+              text: 'Exit',
+            },
           },
         });
       }
@@ -72,22 +78,23 @@ export class QuestionComponent implements OnInit, OnDestroy {
       btn.color = 'warn';
       this.answersClicked = 1;
 
-      this.openDialog({
+      this.dialogService.openDialog({
         title: 'Game Over',
         text: 'Sorry, wrong answer.',
         winnings: this.questionsService.getWinnings(),
-        action: {
-          exitGame: false,
-          text: 'Start Over',
+        actions: {
+          main: {
+            exitGame: false,
+            reset: true,
+            text: 'Start Over',
+          },
+          secondary: {
+            exitGame: true,
+            reset: false,
+            text: 'Exit',
+          },
         },
       });
     }
-  }
-
-  openDialog(data: IDialogData) {
-    this.dialog.open(GameOverDialogComponent, {
-      disableClose: true,
-      data,
-    });
   }
 }
