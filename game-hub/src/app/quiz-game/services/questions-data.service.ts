@@ -85,18 +85,9 @@ export class QuestionsDataService {
   }
 
   reset(): void {
-    this.questions = [];
+    this.terminate();
     this.questionSubject.next(this.questions);
-
-    this.hints = ['50/50', 'Friend', 'Audience'];
-    this.hintsSubject.next(this.hints);
-
-    this.stage = 1;
-    this.stageSubject.next(this.stage);
-
-    this.fetchQuestionsService.resetDificultyStages();
-    this.questionsSubscription.unsubscribe();
-    this.questionsSubscription = this.subscribeToQuestions();
+    this.createSubscription();
   }
 
   terminate(): void {
@@ -112,10 +103,18 @@ export class QuestionsDataService {
     this.questionsSubscription.unsubscribe();
   }
 
-  fiftyFiftyHint(): void {
-    if (!this.hints.includes('50/50')) return;
-    this.hints.splice(this.hints.indexOf('50/50'), 1);
+  canUseHint(hintName: string): boolean {
+    if (!this.hints.includes(hintName)) return false;
+
+    this.hints.splice(this.hints.indexOf(hintName), 1);
     this.hintsSubject.next(this.hints);
+
+    return true;
+  }
+
+  fiftyFiftyHint(): void {
+    const canUse = this.canUseHint('50/50');
+    if (!canUse) return;
 
     const current_question = this.questions[0];
 
@@ -133,17 +132,15 @@ export class QuestionsDataService {
   }
 
   friendHint(): void {
-    if (!this.hints.includes('Friend')) return;
-    this.hints.splice(this.hints.indexOf('Friend'), 1);
-    this.hintsSubject.next(this.hints);
+    const canUse = this.canUseHint('Friend');
+    if (!canUse) return;
 
     const current_question = this.questions[0];
   }
 
   audienceHint(): void {
-    if (!this.hints.includes('Audience')) return;
-    this.hints.splice(this.hints.indexOf('Audience'), 1);
-    this.hintsSubject.next(this.hints);
+    const canUse = this.canUseHint('Audience');
+    if (!canUse) return;
 
     const current_question = this.questions[0];
   }

@@ -8,6 +8,7 @@ import { QuestionComponent } from './question/question.component';
 import { StagesComponent } from './stages/stages.component';
 import { GameOverDialogComponent } from './game-over-dialog/game-over-dialog.component';
 import { MaterialModule } from '../shared/material.module';
+import { RoutingModule } from '../routing.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,6 @@ import { MaterialModule } from '../shared/material.module';
     StagesComponent,
     GameOverDialogComponent,
   ],
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, RoutingModule],
 })
 export class QuizGameModule {}

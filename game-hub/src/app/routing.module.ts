@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { QuizGameComponent } from './quiz-game/quiz-game.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'scoreboard',
+    component: ScoreboardComponent,
   },
   {
     path: 'login',

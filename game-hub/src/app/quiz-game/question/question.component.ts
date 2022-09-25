@@ -55,6 +55,10 @@ export class QuestionComponent implements OnInit, OnDestroy {
           title: 'Congratulations!',
           text: 'You won the top price.',
           winnings: this.questionsService.getWinnings(),
+          action: {
+            exitGame: false,
+            text: 'Start Over',
+          },
         });
       }
 
@@ -72,6 +76,10 @@ export class QuestionComponent implements OnInit, OnDestroy {
         title: 'Game Over',
         text: 'Sorry, wrong answer.',
         winnings: this.questionsService.getWinnings(),
+        action: {
+          exitGame: false,
+          text: 'Start Over',
+        },
       });
     }
   }
