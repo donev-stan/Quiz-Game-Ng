@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { interval, Subject, Subscription } from 'rxjs';
 import { IQuestion } from '../question/question';
 
 import { FetchQuestionsService } from './fetch-questions.service';
@@ -17,6 +17,10 @@ export class QuestionsDataService {
 
   hints: string[] = ['50/50', 'Friend', 'Audience'];
   hintsSubject: Subject<string[]> = new Subject();
+
+  timerSubscription!: Subscription;
+  timerValue: number = 60;
+  timerSubject: Subject<number> = new Subject();
 
   gameStages: any = {
     1: 100,
@@ -58,7 +62,30 @@ export class QuestionsDataService {
       });
   }
 
+  startTimer(): void {
+    if (this.timerSubscription) this.destroyTimer();
+
+    this.timerValue = 30;
+    this.timerSubscription = interval(1000).subscribe((time) => {
+      if (this.timerValue === 0) {
+        this.destroyTimer();
+        return;
+      }
+
+      this.timerValue--;
+      this.timerSubject.next(this.timerValue);
+
+      console.log(this.timerValue);
+    });
+  }
+
+  destroyTimer(): void {
+    this.timerSubscription.unsubscribe();
+  }
+
   nextStage(): void {
+    this.destroyTimer();
+
     if (this.stage === 15) return;
 
     this.stage++;
@@ -69,6 +96,8 @@ export class QuestionsDataService {
       this.questionsSubscription.unsubscribe();
       this.questionsSubscription = this.subscribeToQuestions();
     }
+
+    this.startTimer();
   }
 
   getWinnings(): number {

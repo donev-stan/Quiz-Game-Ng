@@ -30,6 +30,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
           console.log(
             `Correct Answer: \n ${this.questions[0]?.correct_answer}`
           );
+
+          this.questionsService.startTimer();
         }
       );
   }
@@ -37,6 +39,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.questionsSubscription.unsubscribe();
     this.questionsService.terminate();
+    this.questionsService.destroyTimer();
   }
 
   checkAnswer(answer: string, btn: any): void {
@@ -78,6 +81,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
       btn.color = 'warn';
       this.answersClicked = 1;
 
+      this.questionsService.destroyTimer();
       this.dialogService.openDialog({
         title: 'Game Over',
         text: 'Sorry, wrong answer.',

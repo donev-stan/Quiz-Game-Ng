@@ -15,17 +15,17 @@ export class DialogComponent {
     @Inject(DIALOG_DATA) public data: IDialogData,
     private questionService: QuestionsDataService,
     private router: Router
-  ) {
-    console.log(data.audienceResponse);
-  }
+  ) {}
 
   btnClick(exitGame: boolean, reset: boolean) {
     this.dialogRef.close();
 
     if (exitGame) {
       this.router.navigate(['/home']);
+      this.questionService.destroyTimer();
     } else if (reset) {
       this.questionService.reset();
+      this.questionService.destroyTimer();
     }
   }
 

@@ -1,2 +1,2 @@
 <img src="/assets/images/quiz-game/timer.png" class="timer-img">
-<p class="timer-text">00:59</p>
+<p appTimer [value]="timer" class="timer-text">00:{{timer | number: '2.0'}}</p>

@@ -9,6 +9,7 @@ import { StagesComponent } from './stages/stages.component';
 import { MaterialModule } from '../shared/material.module';
 import { RoutingModule } from '../routing.module';
 import { DialogComponent } from './dialog/dialog.component';
+import { TimerDirective } from './timer-and-hints/timer/timer.directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { DialogComponent } from './dialog/dialog.component';
     QuestionComponent,
     StagesComponent,
     DialogComponent,
+    TimerDirective,
   ],
   imports: [CommonModule, MaterialModule, RoutingModule],
 })
