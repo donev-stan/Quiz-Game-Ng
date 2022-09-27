@@ -1,5 +1,5 @@
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { QuestionsDataService } from '../services/questions-data.service';
 import { IDialogData } from './dialogData';
@@ -9,7 +9,7 @@ import { IDialogData } from './dialogData';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
 })
-export class DialogComponent {
+export class DialogComponent implements OnInit {
   constructor(
     public dialogRef: DialogRef,
     @Inject(DIALOG_DATA) public data: IDialogData,
@@ -17,8 +17,10 @@ export class DialogComponent {
     private router: Router
   ) {}
 
+  ngOnInit(): void {}
+
   btnClick(exitGame: boolean, reset: boolean) {
-    this.dialogRef.close({ data: 'asdasdasdasdsrgdesbsdftgsd' });
+    this.dialogRef.close();
 
     if (exitGame) {
       this.router.navigate(['/home']);

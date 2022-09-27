@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 import { DialogService } from '../dialog/dialog.service';
 import { QuestionsDataService } from '../services/questions-data.service';
 import { IQuestion } from './question';
@@ -52,6 +52,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
       btn.color = 'success';
 
       if (this.questionsService.stage === 15) {
+        this.questionsService.canLeaveGameSubject.next(true);
+
         this.dialogService.openDialog({
           title: 'Congratulations!',
           text: 'You won the top price.',
@@ -78,6 +80,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
         console.log(`Correct Answer: \n ${this.questions[0]?.correct_answer}`);
       }, 500);
     } else {
+      this.questionsService.canLeaveGameSubject.next(true);
+
       btn.color = 'warn';
       this.answersClicked = 1;
 

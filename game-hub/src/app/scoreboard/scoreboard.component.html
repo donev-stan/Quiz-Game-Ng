@@ -1,1 +1,20 @@
-<p>scoreboard works!</p>
+<div class="container">
+    <mat-card class="list">
+        <mat-selection-list [multiple]="false">
+            <div mat-subheader>Users</div>
+            <mat-list-option *ngFor="let user of users">
+                <mat-icon mat-list-icon>person</mat-icon>
+                <div mat-line>{{user.name}}</div>
+                <div mat-line> {{user.updated | date}} </div>
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-card>
+
+    <mat-card class="main">
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="All">All Records</mat-tab>
+            <mat-tab label="Quiz">Quiz Game Records</mat-tab>
+            <mat-tab label="Hangman">Handman Records</mat-tab>
+        </mat-tab-group>
+    </mat-card>
+</div>

@@ -20,6 +20,8 @@ export class TimerComponent implements OnInit {
       this.timer = time;
 
       if (this.timer === 0) {
+        this.questionService.canLeaveGameSubject.next(true);
+
         this.dialogService.openDialog({
           title: 'Game Over',
           text: 'Sorry, you ran out of time!',
