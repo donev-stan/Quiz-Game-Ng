@@ -5,7 +5,7 @@
   },
   "hosting": {
     "site": "gameshub",
-    "public": "build",
+    "public": "dist/game-hub",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {

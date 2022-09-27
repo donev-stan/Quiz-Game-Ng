@@ -1,5 +1,33 @@
 <div class="container">
     <mat-card>
-        Register Component!
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+            <div formGroupName="basicCredentials">
+                <mat-form-field appearance="fill">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username">
+                </mat-form-field>
+            </div>
+
+            <div formGroupName="securityCredentials">
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hidePass = !hidePass"
+                        [attr.aria-label]="'hidePass password'" [attr.aria-pressed]="hidePass">
+                        <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <button mat-raised-button color="primary" type="submit">Register</button>
+            </div>
+        </form>
     </mat-card>
 </div>

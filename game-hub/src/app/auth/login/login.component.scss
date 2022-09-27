@@ -1,5 +1,12 @@
 .container {
   mat-card {
     margin: 20px auto;
+
+    form {
+      div {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 }

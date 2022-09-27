@@ -19,7 +19,7 @@ export class QuestionsDataService {
   hintsSubject: Subject<string[]> = new Subject();
 
   timerSubscription!: Subscription;
-  timerValue: number = 60;
+  timerValue: number = 59;
   timerSubject: Subject<number> = new Subject();
 
   gameStages: any = {
@@ -65,7 +65,7 @@ export class QuestionsDataService {
   startTimer(): void {
     if (this.timerSubscription) this.destroyTimer();
 
-    this.timerValue = 60;
+    this.timerValue = 59;
     this.timerSubscription = interval(1000).subscribe((time) => {
       if (this.timerValue === 0) {
         this.destroyTimer();
