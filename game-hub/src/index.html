@@ -14,6 +14,24 @@
 
 <body class="mat-typography">
   <app-root></app-root>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCe0KItqFdwK9Ql8COiA-NKTSLs8ggbusc",
+      authDomain: "games-hub---angular.firebaseapp.com",
+      projectId: "games-hub---angular",
+      storageBucket: "games-hub---angular.appspot.com",
+      messagingSenderId: "758373419468",
+      appId: "1:758373419468:web:1a6c4050855760a1747569",
+      measurementId: "G-ZQH4BCDLTW"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </body>
 
 </html>

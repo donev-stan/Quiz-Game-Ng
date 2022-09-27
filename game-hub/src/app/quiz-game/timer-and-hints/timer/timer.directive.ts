@@ -3,6 +3,7 @@ import {
   ElementRef,
   Input,
   OnChanges,
+  OnInit,
   Renderer2,
   SimpleChanges,
 } from '@angular/core';
@@ -10,10 +11,18 @@ import {
 @Directive({
   selector: '[appTimer]',
 })
-export class TimerDirective implements OnChanges {
+export class TimerDirective implements OnInit, OnChanges {
   @Input('value') timer!: number;
 
   constructor(private renderer: Renderer2, private elRef: ElementRef) {}
+
+  ngOnInit(): void {
+    this.renderer.setStyle(
+      this.elRef.nativeElement,
+      'text-shadow',
+      '1px 2px 2px black'
+    );
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.timer < 15) {

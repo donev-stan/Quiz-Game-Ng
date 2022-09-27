@@ -12,6 +12,9 @@ import { RoutingModule } from './routing.module';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
     MaterialModule,
     HttpClientModule,
     QuizGameModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent],
