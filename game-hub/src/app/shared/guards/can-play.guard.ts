@@ -7,20 +7,19 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth/auth.service';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
-  constructor(private authService: AuthService, private router: Router) {}
+export class CanPlayGuard implements CanActivate, CanActivateChild {
+  constructor(private firebase: FirebaseService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const loggedInUser = this.authService.getLoggedUser();
-    if (loggedInUser) return true;
+    if (this.firebase.isLoggedUser()) return true;
 
     this.router.navigate(['/login']);
     return false;

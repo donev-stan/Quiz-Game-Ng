@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { UserService } from 'src/app/services/user/user.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +13,7 @@ export class LoginComponent implements OnInit {
   hidePass: boolean = true;
   error: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private firebase: FirebaseService, private router: Router) {}
 
   ngOnInit(): void {
     // Create form
@@ -25,19 +24,18 @@ export class LoginComponent implements OnInit {
         Validators.required,
       ]),
     });
-
-    // if logged user - navigate to home page
-    if (this.authService.getLoggedUser()) this.router.navigate(['/home']);
-
-    this.authService.loggedUserSubject.subscribe((loggedInUser) => {
-      if (loggedInUser) this.router.navigate(['/home']);
-      else this.error = true;
-    });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value);
+      this.firebase.login(this.loginForm.value).subscribe((data) => {
+        if (!data.empty) {
+          this.firebase.setLoggedUser(data.docs[0].id);
+          this.router.navigate(['/home']);
+        } else {
+          this.error = true;
+        }
+      });
     }
   }
 }

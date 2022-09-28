@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth/auth.service';
-import { IUser } from '../services/user/user';
+import { Router } from '@angular/router';
+import { IUser } from '../models/user';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +11,18 @@ import { IUser } from '../services/user/user';
 export class HeaderComponent implements OnInit {
   loggedUser: IUser | undefined;
 
-  constructor(private authService: AuthService) {
-    this.loggedUser = this.authService.getLoggedUser();
+  constructor(private firebase: FirebaseService, private router: Router) {
+    this.loggedUser = this.firebase.isLoggedUser();
   }
 
   ngOnInit(): void {
-    this.authService.loggedUserSubject.subscribe((loggedUser) => {
-      this.loggedUser = loggedUser;
+    this.firebase.loggedUserNotification.subscribe((loggedInUser) => {
+      this.loggedUser = loggedInUser;
     });
+  }
+
+  onLogout(): void {
+    this.firebase.logout();
+    this.router.navigate(['/home']);
   }
 }

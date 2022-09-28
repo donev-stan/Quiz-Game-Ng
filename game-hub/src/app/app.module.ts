@@ -17,6 +17,9 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { UsersListComponent } from './scoreboard/users-list/users-list.component';
+import { UserRecordsComponent } from './scoreboard/user-records/user-records.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { ProfileComponent } from './profile/profile.component';
     RegisterComponent,
     ScoreboardComponent,
     ProfileComponent,
+    UsersListComponent,
+    UserRecordsComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,7 @@ import { ProfileComponent } from './profile/profile.component';
     HttpClientModule,
     QuizGameModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
   ],

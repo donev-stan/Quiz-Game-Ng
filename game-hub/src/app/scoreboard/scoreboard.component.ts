@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IUser } from '../models/user';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-scoreboard',
@@ -6,21 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./scoreboard.component.scss'],
 })
 export class ScoreboardComponent implements OnInit {
-  users = [
-    {
-      name: 'Stan',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Vasil',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Stoqn',
-      updated: new Date('1/28/16'),
-    },
-  ];
-
   constructor() {}
 
   ngOnInit(): void {}

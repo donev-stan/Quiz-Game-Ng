@@ -28,8 +28,9 @@
 
     <ng-template #loggedInBlock>
         <button mat-button [routerLink]="['/profile', loggedUser?.id]">
-            <i> Hello, {{loggedUser?.username}}!</i> <img [src]="loggedUser?.avatar" [alt]="loggedUser?.username"
-                class="avatar">
+            <i> Hi, {{loggedUser?.username}}!</i>
+            <img [src]="loggedUser?.avatar" class="avatar">
         </button>
+        <button mat-raised-button (click)="onLogout()">Logout</button>
     </ng-template>
 </mat-toolbar>
