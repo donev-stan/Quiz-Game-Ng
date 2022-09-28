@@ -19,6 +19,17 @@
 
     <span class="spacer"></span>
 
-    <a mat-button routerLink="/login">Login</a>
-    <a mat-raised-button routerLink="/register">Register</a>
+    <div *ngIf="loggedUser; then loggedInBlock else loginBlock"></div>
+
+    <ng-template #loginBlock>
+        <a mat-button routerLink="/login">Login</a>
+        <a mat-raised-button routerLink="/register">Register</a>
+    </ng-template>
+
+    <ng-template #loggedInBlock>
+        <button mat-button [routerLink]="['/profile', loggedUser?.id]">
+            <i> Hello, {{loggedUser?.username}}!</i> <img [src]="loggedUser?.avatar" [alt]="loggedUser?.username"
+                class="avatar">
+        </button>
+    </ng-template>
 </mat-toolbar>

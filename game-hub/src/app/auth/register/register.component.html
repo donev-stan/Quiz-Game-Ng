@@ -1,4 +1,6 @@
 <div class="container">
+
+
     <mat-card>
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
 
@@ -26,8 +28,39 @@
             </div>
 
             <div>
-                <button mat-raised-button color="primary" type="submit">Register</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">Register</button>
             </div>
         </form>
     </mat-card>
+
+    <div class="error-msg-block">
+        <mat-card class="error-msg"
+            *ngIf="!userForm.get('basicCredentials.username')?.valid && userForm.get('basicCredentials.username')?.touched && userForm.get('basicCredentials.username')?.value !== ' '">
+            <h3 style="margin-bottom: -10px"> <i> Username is invalid! </i></h3>
+            <ul>
+                <li>Required.</li>
+                <li>Could be already taken.</li>
+            </ul>
+        </mat-card>
+
+        <mat-card class="error-msg"
+            *ngIf="!userForm.get('securityCredentials.email')?.valid && userForm.get('securityCredentials.email')?.touched">
+            <h3 style="margin-bottom: -10px"> <i> Email is invalid! </i></h3>
+            <ul>
+                <li>Required.</li>
+                <li>Must be a valid email address.</li>
+                <li>Could be already taken.</li>
+            </ul>
+        </mat-card>
+
+        <mat-card class="error-msg"
+            *ngIf="!userForm.get('securityCredentials.password')?.valid && userForm.get('securityCredentials.password')?.touched">
+            <h3 style="margin-bottom: -10px"> <i> Password is invalid! </i></h3>
+            <ul>
+                <li>Required.</li>
+                <li>Must be at least 6 symbols.</li>
+                <li>Must contain a number.</li>
+            </ul>
+        </mat-card>
+    </div>
 </div>

@@ -1,6 +1,8 @@
 .container {
+  flex-direction: column;
+
   mat-card {
-    margin: 20px auto;
+    margin: 20px auto 0;
 
     form {
       div {
@@ -9,4 +11,8 @@
       }
     }
   }
+}
+
+.error-msg {
+  color: orangered;
 }

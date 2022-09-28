@@ -16,6 +16,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     ScoreboardComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

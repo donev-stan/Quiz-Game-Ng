@@ -1,4 +1,6 @@
 .container {
+  flex-direction: column;
+
   mat-card {
     margin: 20px auto;
 
@@ -11,6 +13,72 @@
   }
 }
 
-// mat-form-field {
-//   margin-bottom: 5px;
-// }
+.error-msg-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  mat-card {
+    margin: 0 auto;
+  }
+}
+
+.error-msg {
+  color: orangered;
+  animation: errorMsgAnimationEnter 0.3s ease 0s 1 normal forwards;
+}
+
+@keyframes errorMsgAnimationEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(-250px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-card {
+  animation: errorAnimationEnter 0.5s ease 0s 1 normal forwards,
+    errorAnimation 1s ease 0.4s 1 normal forwards;
+}
+
+@keyframes errorAnimationEnter {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes errorAnimation {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-10px);
+  }
+
+  20%,
+  40%,
+  60% {
+    transform: translateX(10px);
+  }
+
+  80% {
+    transform: translateX(8px);
+  }
+
+  90% {
+    transform: translateX(-8px);
+  }
+}

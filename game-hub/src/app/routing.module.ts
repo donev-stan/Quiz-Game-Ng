@@ -7,6 +7,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { CanLeaveGameGuard } from './quiz-game/can-leave-game.guard';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   {
@@ -31,8 +33,17 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
+    path: 'profile/:id',
+    component: ProfileComponent,
+  },
+  {
+    path: 'profile-edit',
+    component: RegisterComponent,
+  },
+  {
     path: 'quiz-game',
     component: QuizGameComponent,
+    canActivate: [AuthGuard],
     canDeactivate: [CanLeaveGameGuard],
   },
   {
