@@ -8,7 +8,9 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { CanLeaveGameGuard } from './quiz-game/can-leave-game.guard';
 import { ProfileComponent } from './profile/profile.component';
-import { AuthGuard } from './shared/auth.guard';
+import { CanPlayGuard } from './shared/guards/can-play.guard';
+import { CanLoginGuard } from './shared/guards/can-login.guard';
+import { UserRecordsComponent } from './scoreboard/user-records/user-records.component';
 
 const routes: Routes = [
   {
@@ -23,10 +25,19 @@ const routes: Routes = [
   {
     path: 'scoreboard',
     component: ScoreboardComponent,
+
+    children: [
+      {
+        path: ':id',
+        component: UserRecordsComponent,
+      },
+    ],
   },
+
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [CanLoginGuard],
   },
   {
     path: 'register',
@@ -43,7 +54,7 @@ const routes: Routes = [
   {
     path: 'quiz-game',
     component: QuizGameComponent,
-    canActivate: [AuthGuard],
+    canActivate: [CanPlayGuard],
     canDeactivate: [CanLeaveGameGuard],
   },
   {
