@@ -12,7 +12,6 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class RegisterComponent implements OnInit {
   userForm!: FormGroup;
-  allowSkip: boolean = false;
   hidePass: boolean = true;
 
   takenUsernames = ['Stan'];
@@ -42,7 +41,6 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           this.validateTakenUsername.bind(this),
         ]),
-        // pets: new FormArray([]),
       }),
       securityCredentials: new FormGroup({
         email: new FormControl(null, [

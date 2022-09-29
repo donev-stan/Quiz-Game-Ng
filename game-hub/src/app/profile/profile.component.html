@@ -1,1 +1,52 @@
-<p>profile works!</p>
+<div class="container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <mat-card class="avatar-card">
+            <img [src]="'https://robohash.org/'+userForm.get('avatar')?.value" alt="Avatar" style="width: 150px;">
+            <mat-form-field appearance="fill">
+                <mat-label>Seed</mat-label>
+                <input matInput #seedInput maxlength="20" formControlName="avatar">
+                <mat-hint align="start" *ngIf="editMode"><strong>Enter Avatar Seed</strong></mat-hint>
+                <mat-hint align="end" *ngIf="editMode">{{seedInput.value.length}} / 20</mat-hint>
+            </mat-form-field>
+            <button mat-raised-button color="primary" *ngIf="editMode">Generate</button>
+
+        </mat-card>
+
+        <mat-card class="user-data-card">
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'hidePass password'"
+                    [attr.aria-pressed]="hidePass">
+                    <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" *ngIf="editMode">
+                <mat-label>Repeat Password</mat-label>
+                <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'hidePass password'"
+                    [attr.aria-pressed]="hidePass" [disabled]="!editMode">
+                    <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+        </mat-card>
+    </form>
+
+    <mat-card class="actions" *ngIf="!editMode">
+        <button mat-raised-button>Logout</button>
+        <button mat-raised-button color="accent">Edit</button>
+        <button mat-raised-button color="warn">Delete</button>
+    </mat-card>
+
+</div>

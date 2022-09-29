@@ -1,14 +1,20 @@
 <mat-card>
     <mat-selection-list [multiple]="false">
         <div mat-subheader>Users</div>
-        <mat-list-option *ngFor="let user of users" [routerLink]="['/scoreboard', user.id]">
-            <div class="list-user">
-                <img [src]="user.avatar" class="avatar">
-                <div class="user-info">
-                    <div mat-line>{{user.username}}</div>
-                    <!-- <div mat-line> {{user.lastLogin | date}} </div> -->
+        <div *ngIf="users.length">
+            <mat-list-option *ngFor="let user of users" [routerLink]="['/scoreboard', user.id]">
+                <div class="list-user">
+                    <img [src]="user.avatar" class="avatar">
+                    <div class="user-info">
+                        <div mat-line>{{user.username}}</div>
+                        <!-- <div mat-line> {{user.lastLogin | date}} </div> -->
+                    </div>
                 </div>
-            </div>
-        </mat-list-option>
+            </mat-list-option>
+        </div>
+        <div *ngIf="!users.length">
+            <mat-spinner></mat-spinner>
+        </div>
+
     </mat-selection-list>
 </mat-card>

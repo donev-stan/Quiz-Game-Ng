@@ -1,0 +1,33 @@
+.container {
+  padding: 20px 30px;
+  gap: 30px;
+
+  form {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+
+    .avatar-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .user-data-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      flex: 3;
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+}
