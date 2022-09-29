@@ -81,6 +81,7 @@ export class FirebaseService {
   }
 
   register(registerData: IRegisterData) {
+    registerData.avatar = `https://robohash.org/${registerData.username}`;
     return this.firestore.collection('users').add(registerData);
   }
 
@@ -102,6 +103,8 @@ export class FirebaseService {
 
   updateUser(userId: string, newUserData: IUser): Promise<any> {
     newUserData.avatar = `https://robohash.org/${newUserData.avatar}`;
+    delete newUserData.repeatedPassword;
+
     return this.firestore.collection('users').doc(userId).set(newUserData);
   }
 

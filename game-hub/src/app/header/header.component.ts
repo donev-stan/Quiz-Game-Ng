@@ -21,8 +21,8 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  onLogout(): void {
-    this.firebase.logout();
-    this.router.navigate(['/home']);
-  }
+  // onLogout(): void {
+  //   this.firebase.logout();
+  //   this.router.navigate(['/home']);
+  // }
 }
