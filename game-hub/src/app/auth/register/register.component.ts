@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { IForbiddenUserData } from 'src/app/models/forbiddenUserData';
 import { IRegisterData } from 'src/app/models/registerData';
+import { IUser } from 'src/app/models/user';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -15,8 +16,8 @@ export class RegisterComponent implements OnInit {
   userForm!: FormGroup;
   hidePass: boolean = true;
 
-  takenUsernames = ['Stan'];
-  takenEmails = ['stan@gmail.com'];
+  takenUsernames = [''];
+  takenEmails = [''];
 
   constructor(private firebase: FirebaseService, private router: Router) {
     firebase.users
@@ -26,6 +27,9 @@ export class RegisterComponent implements OnInit {
         )
       )
       .subscribe((data) => {
+        this.takenUsernames = [];
+        this.takenEmails = [];
+
         data.forEach((user: IForbiddenUserData) => {
           this.takenUsernames.push(user.username);
           this.takenEmails.push(user.email);
@@ -83,11 +87,10 @@ export class RegisterComponent implements OnInit {
 
       this.firebase
         .register(newUser)
-        .then(() => {
-          this.router.navigate(['/home']);
-          this.firebase.login({
-            email: newUser.email,
-            password: newUser.password,
+        .then((docData) => {
+          this.firebase.getUserByID(docData.id).subscribe((user: IUser) => {
+            this.firebase.setLoggedUser(user);
+            this.router.navigate(['/home']);
           });
         })
         .catch((error) => console.error(error));
