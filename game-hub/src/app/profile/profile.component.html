@@ -1,26 +1,27 @@
-<div class="container">
+<div class="container" *ngIf="userForm">
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <mat-card class="avatar-card">
-            <img [src]="'https://robohash.org/'+userForm.get('avatar')?.value" alt="Avatar" style="width: 150px;">
+            <img [src]="'https://robohash.org/'+ (userForm.get('avatar')?.value || 'default')" alt="Avatar"
+                style="width: 100%;">
             <mat-form-field appearance="fill">
                 <mat-label>Seed</mat-label>
                 <input matInput #seedInput maxlength="20" formControlName="avatar">
                 <mat-hint align="start" *ngIf="editMode"><strong>Enter Avatar Seed</strong></mat-hint>
                 <mat-hint align="end" *ngIf="editMode">{{seedInput.value.length}} / 20</mat-hint>
             </mat-form-field>
-            <button mat-raised-button color="primary" *ngIf="editMode">Generate</button>
-
         </mat-card>
 
         <mat-card class="user-data-card">
             <mat-form-field appearance="fill">
                 <mat-label>Username</mat-label>
                 <input matInput formControlName="username">
+                <mat-error>Username unavailable!</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
                 <input type="email" matInput formControlName="email">
+                <mat-error>Email is already in use!</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill">
@@ -30,23 +31,35 @@
                     [attr.aria-pressed]="hidePass">
                     <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
+                <mat-error>Invalid password!</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill" *ngIf="editMode">
                 <mat-label>Repeat Password</mat-label>
-                <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password">
-                <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'hidePass password'"
-                    [attr.aria-pressed]="hidePass" [disabled]="!editMode">
-                    <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <input matInput type="password" formControlName="repeatedPassword">
+                <button mat-icon-button matSuffix disabled>
+                    <mat-icon>visibility_off</mat-icon>
                 </button>
+                <mat-error>Passwords does not match!</mat-error>
             </mat-form-field>
+
+            <div class="actions-profile" *ngIf="!editMode">
+                <button mat-raised-button (click)="onLogout()">
+                    <mat-icon>input</mat-icon> Logout
+                </button>
+                <button mat-raised-button color="accent" [routerLink]="['/profile-edit', id]">
+                    <mat-icon>edit</mat-icon> Edit
+                </button>
+                <button mat-raised-button color="warn" (click)="onDelete()">
+                    <mat-icon>delete</mat-icon> Delete
+                </button>
+            </div>
         </mat-card>
+
+        <mat-card class="actions-edit" *ngIf="editMode">
+            <button mat-raised-button color="warn">Cancel</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">Save</button>
+        </mat-card>
+
     </form>
-
-    <mat-card class="actions" *ngIf="!editMode">
-        <button mat-raised-button>Logout</button>
-        <button mat-raised-button color="accent">Edit</button>
-        <button mat-raised-button color="warn">Delete</button>
-    </mat-card>
-
 </div>

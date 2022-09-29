@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { filter, map, tap } from 'rxjs';
+import { IForbiddenUserData } from '../models/forbiddenUserData';
 import { IUser } from '../models/user';
 import { FirebaseService } from '../services/firebase.service';
 
@@ -13,15 +15,17 @@ export class ProfileComponent implements OnInit {
   userForm!: FormGroup;
   hidePass: boolean = true;
 
-  takenUsernames = ['Stan'];
-  takenEmails = ['stan@gmail.com'];
+  takenUsernames = [''];
+  takenEmails = [''];
 
   editMode: boolean = false;
 
+  user!: IUser;
   id!: string;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private firebase: FirebaseService
   ) {}
 
@@ -30,48 +34,78 @@ export class ProfileComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = params['id'];
 
+      // Get LoggedInUser
       this.firebase.getUserByID(this.id).subscribe((user: IUser) => {
+        this.user = user;
         this.createForm(user);
 
-        console.log();
+        // Check if we are in EDIT MODE
+        if (this.route.routeConfig!.path === 'profile-edit/:id') {
+          this.editMode = true;
+
+          // Get ForbiddenData
+          this.firebase
+            .getForbiddenData()
+            .pipe(
+              map((data: IForbiddenUserData[]) => {
+                return data.filter(
+                  (data: IForbiddenUserData) =>
+                    data.email !== this.user.email &&
+                    data.username !== this.user.username
+                );
+              })
+            )
+            .subscribe((data) => {
+              this.takenUsernames = [];
+              this.takenEmails = [];
+
+              data.forEach((user: IForbiddenUserData) => {
+                this.takenUsernames.push(user.username);
+                this.takenEmails.push(user.email);
+              });
+            });
+        } else {
+          // If not in edit mode - disable inputs
+          this.disableInputs(this.editMode);
+        }
       });
     });
   }
 
   createForm(userData: IUser): void {
     this.userForm = new FormGroup({
-      avatar: new FormControl(
-        {
-          value: userData.avatar?.split('/').reverse()[0],
-          disabled: !this.editMode,
-        },
-        [Validators.required]
-      ),
-      username: new FormControl(
-        { value: userData.username, disabled: !this.editMode },
-        [Validators.required, this.validateTakenUsername.bind(this)]
-      ),
-      email: new FormControl(
-        { value: userData.email, disabled: !this.editMode },
-        [
-          Validators.email,
-          Validators.required,
-          this.validateTakenEmail.bind(this),
-        ]
-      ),
-      password: new FormControl(
-        { value: userData.password, disabled: !this.editMode },
-        [Validators.minLength(6), Validators.required]
-      ),
-      repeatedPassword: new FormControl(
-        { value: userData.password, disabled: !this.editMode },
-        [
-          this.validateRepeadedPassword.bind(this),
-          Validators.minLength(6),
-          Validators.required,
-        ]
-      ),
+      avatar: new FormControl(userData.avatar?.split('/').reverse()[0], [
+        Validators.required,
+      ]),
+      username: new FormControl(userData.username, [
+        Validators.required,
+        this.validateTakenUsername.bind(this),
+      ]),
+      email: new FormControl(userData.email, [
+        Validators.required,
+        Validators.email,
+        this.validateTakenEmail.bind(this),
+      ]),
+      password: new FormControl(userData.password, [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      repeatedPassword: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(6),
+        this.validateRepeadedPassword.bind(this),
+      ]),
     });
+  }
+
+  disableInputs(editMode: boolean): void {
+    if (!editMode) {
+      this.userForm.get('username')?.disable();
+      this.userForm.get('avatar')?.disable();
+      this.userForm.get('email')?.disable();
+      this.userForm.get('password')?.disable();
+      this.userForm.get('repeatedPassword')?.disable();
+    }
   }
 
   validateTakenUsername(control: FormControl): { [s: string]: boolean } | null {
@@ -83,7 +117,7 @@ export class ProfileComponent implements OnInit {
   }
 
   validateTakenEmail(control: FormControl): { [s: string]: boolean } | null {
-    if (this.takenEmails.indexOf(control.value) !== -1) {
+    if (this.takenEmails?.indexOf(control.value) !== -1) {
       return { emailTaken: true };
     }
 
@@ -93,7 +127,7 @@ export class ProfileComponent implements OnInit {
   validateRepeadedPassword(
     control: FormControl
   ): { [s: string]: boolean } | null {
-    if (control.value !== this.userForm.controls['password'].value) {
+    if (control.value !== this.userForm?.controls['password']?.value) {
       return { passwordsDontMatch: true };
     }
 
@@ -101,6 +135,37 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.userForm.value);
+    if (this.userForm.valid && this.validateChanges()) {
+      this.firebase.updateUser(this.id, this.userForm.value).then((data) => {
+        console.log(data);
+        this.router.navigate(['/profile', this.id]);
+      });
+    }
+  }
+
+  validateChanges(): boolean {
+    if (
+      this.user.avatar!.split('/').reverse()[0] !==
+        this.userForm?.controls['avatar']?.value ||
+      this.user.username !== this.userForm?.controls['username']?.value ||
+      this.user.password !== this.userForm?.controls['password']?.value ||
+      this.user.email !== this.userForm?.controls['email']?.value
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  onLogout(): void {
+    this.firebase.logout();
+    this.router.navigate(['/home']);
+  }
+
+  onDelete(): void {
+    this.router.navigate(['/home']);
+    this.firebase.logout();
+    this.firebase.deleteUser(this.id).then((data) => {
+      console.log(data);
+    });
   }
 }

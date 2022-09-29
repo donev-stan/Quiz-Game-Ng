@@ -5,6 +5,7 @@ import { IUser } from '../models/user';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collection, doc, onSnapshot, query } from '@angular/fire/firestore';
 import { IRegisterData } from '../models/registerData';
+import { IForbiddenUserData } from '../models/forbiddenUserData';
 
 @Injectable({
   providedIn: 'root',
@@ -26,8 +27,6 @@ export class FirebaseService {
             const user = users.find(
               (user: IUser) => user.id === loggedInUser.id
             );
-
-            console.log(loggedInUser);
 
             if (user) this.setLoggedUser(user);
           }
@@ -91,5 +90,22 @@ export class FirebaseService {
       .doc(userId)
       .valueChanges({ idField: 'id' })
       .pipe(tap((user: any) => console.log(user)));
+  }
+
+  getForbiddenData(): Observable<IForbiddenUserData[]> {
+    return this.users.pipe(
+      map((users) =>
+        users.map((user) => ({ username: user.username, email: user.email }))
+      )
+    );
+  }
+
+  updateUser(userId: string, newUserData: IUser): Promise<any> {
+    newUserData.avatar = `https://robohash.org/${newUserData.avatar}`;
+    return this.firestore.collection('users').doc(userId).set(newUserData);
+  }
+
+  deleteUser(userId: string): Promise<any> {
+    return this.firestore.collection('users').doc(userId).delete();
   }
 }

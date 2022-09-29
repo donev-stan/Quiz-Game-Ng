@@ -9,7 +9,7 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { CanLeaveGameGuard } from './quiz-game/can-leave-game.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { CanPlayGuard } from './shared/guards/can-play.guard';
-import { CanLoginGuard } from './shared/guards/can-login.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
 import { UserRecordsComponent } from './scoreboard/user-records/user-records.component';
 
 const routes: Routes = [
@@ -37,7 +37,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [CanLoginGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'register',
@@ -46,10 +46,12 @@ const routes: Routes = [
   {
     path: 'profile/:id',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: 'profile-edit',
-    component: RegisterComponent,
+    path: 'profile-edit/:id',
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'quiz-game',

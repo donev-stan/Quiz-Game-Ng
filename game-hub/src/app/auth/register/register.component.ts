@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
+import { IForbiddenUserData } from 'src/app/models/forbiddenUserData';
 import { IRegisterData } from 'src/app/models/registerData';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -17,8 +18,6 @@ export class RegisterComponent implements OnInit {
   takenUsernames = ['Stan'];
   takenEmails = ['stan@gmail.com'];
 
-  editMode: boolean = false;
-
   constructor(private firebase: FirebaseService, private router: Router) {
     firebase.users
       .pipe(
@@ -27,7 +26,7 @@ export class RegisterComponent implements OnInit {
         )
       )
       .subscribe((data) => {
-        data.forEach((user) => {
+        data.forEach((user: IForbiddenUserData) => {
           this.takenUsernames.push(user.username);
           this.takenEmails.push(user.email);
         });
