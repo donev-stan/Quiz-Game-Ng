@@ -14,6 +14,7 @@
 
 .profile-btn {
   padding-right: 0;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -29,5 +30,13 @@
 
   .menu-links {
     display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-btn {
+    img {
+      margin-top: -5px;
+    }
   }
 }
