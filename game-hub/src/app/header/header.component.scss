@@ -11,3 +11,15 @@
   align-items: center;
   gap: 8px;
 }
+
+@media (max-width: 768px) {
+  mat-toolbar {
+    flex-direction: column;
+    // height: fit-content;
+    height: 280px;
+
+    .register-btn {
+      margin-bottom: 10px;
+    }
+  }
+}

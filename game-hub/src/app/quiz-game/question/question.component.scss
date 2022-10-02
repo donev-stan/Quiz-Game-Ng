@@ -29,3 +29,9 @@
   background-color: #689f38;
   color: #fff;
 }
+
+@media (max-width: 568px) {
+  .container {
+    min-width: auto;
+  }
+}

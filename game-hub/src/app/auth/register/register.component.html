@@ -5,7 +5,7 @@
             <div formGroupName="basicCredentials">
                 <mat-form-field appearance="fill">
                     <mat-label>Username</mat-label>
-                    <input matInput formControlName="username">
+                    <input matInput formControlName="username" (keydown)="preventSpace($event)">
                 </mat-form-field>
             </div>
 

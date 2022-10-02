@@ -96,4 +96,9 @@ export class RegisterComponent implements OnInit {
         .catch((error) => console.error(error));
     }
   }
+
+  preventSpace(event: { keyCode: number }): boolean {
+    if (event.keyCode === 32) return false; // 32 is space key
+    return true;
+  }
 }

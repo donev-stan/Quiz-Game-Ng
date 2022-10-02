@@ -55,3 +55,13 @@
     }
   }
 }
+
+@media (max-width: 368px) {
+  .actions-profile {
+    flex-direction: column;
+
+    button {
+      justify-content: center;
+    }
+  }
+}
