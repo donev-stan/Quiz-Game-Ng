@@ -15,18 +15,46 @@ export class FirebaseService {
   users: Observable<IUser[]>;
 
   constructor(private firestore: AngularFirestore) {
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')!);
+    // this.getAllUsers();
 
-    this.users = firestore
+    this.users = this.firestore
       .collection('users')
       .valueChanges({ idField: 'id' })
       .pipe(
         tap((data) => console.log(data)),
         tap((users: any) => {
+          const loggedInUser = JSON.parse(
+            localStorage.getItem('loggedInUser')!
+          );
+
           if (loggedInUser) {
             const user = users.find(
               (user: IUser) => user.id === loggedInUser.id
             );
+
+            if (user) this.setLoggedUser(user);
+          }
+        })
+      );
+  }
+
+  getAllUsers() {
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')!);
+
+    this.users = this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'id' })
+      .pipe(
+        tap((data) => console.log(data)),
+        tap((users: any) => {
+          console.log(loggedInUser);
+
+          if (loggedInUser) {
+            const user = users.find(
+              (user: IUser) => user.id === loggedInUser.id
+            );
+
+            console.log('I am here and I should not be Here!!');
 
             if (user) this.setLoggedUser(user);
           }
