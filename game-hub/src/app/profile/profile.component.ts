@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -5,6 +6,7 @@ import { filter, map, tap } from 'rxjs';
 import { IForbiddenUserData } from '../models/forbiddenUserData';
 import { IUser } from '../models/user';
 import { FirebaseService } from '../services/firebase.service';
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +28,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private firebase: FirebaseService
+    private firebase: FirebaseService,
+    public dialog: Dialog
   ) {}
 
   ngOnInit(): void {
@@ -159,13 +162,51 @@ export class ProfileComponent implements OnInit {
   onLogout(): void {
     this.firebase.logout();
     this.router.navigate(['/home']);
+
+    // this.dialog.open(DialogComponent, {
+    //   disableClose: true,
+    //   data: {
+    //     title: 'Log out',
+    //     text: 'Are you sure you want to log out?',
+    //     actions: {
+    //       main: {
+    //         text: 'Log out',
+    //         action: 'logout',
+    //       },
+    //       secondary: {
+    //         text: 'Cancel',
+    //         action: 'cancel',
+    //       },
+    //     },
+    //   },
+    // });
   }
 
   onDelete(): void {
-    this.router.navigate(['/home']);
-    this.firebase.logout();
     this.firebase.deleteUser(this.id).then((data) => {
-      console.log(data);
+      if (data) {
+        this.router.navigate(['/home']);
+        this.firebase.logout();
+      }
     });
+
+    // this.dialog.open(DialogComponent, {
+    //   disableClose: true,
+    //   data: {
+    //     title: 'Delete User',
+    //     text: 'Are you sure you want to delete your profile?',
+    //     actions: {
+    //       main: {
+    //         text: 'Delete',
+    //         action: 'delete',
+    //         deleteId: this.id,
+    //       },
+    //       secondary: {
+    //         text: 'Cancel',
+    //         action: 'cancel',
+    //       },
+    //     },
+    //   },
+    // });
   }
 }

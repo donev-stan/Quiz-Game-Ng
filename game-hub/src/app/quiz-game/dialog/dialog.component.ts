@@ -19,7 +19,7 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  btnClick(exitGame: boolean, reset: boolean) {
+  btnClick(exitGame: boolean, reset: boolean): void {
     this.dialogRef.close();
 
     if (exitGame) {

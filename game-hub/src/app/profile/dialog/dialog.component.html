@@ -1,0 +1,14 @@
+<div class="container unselectable" [class.mat-elevation-z2]="true">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <div mat-dialog-content>
+        <p style="font-size: larger" [innerHTML]="data.text"></p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button color="warn" (click)="btnClick(data.actions.secondary.action)">
+            {{data.actions.secondary.text}}
+        </button>
+        <button mat-raised-button color="primary" (click)="btnClick(data.actions.main.action, data.actions?.deleteId)">
+            {{ data.actions.main.text }}
+        </button>
+    </div>
+</div>

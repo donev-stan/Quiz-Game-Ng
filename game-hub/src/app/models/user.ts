@@ -5,4 +5,5 @@ export interface IUser {
   email: string;
   password: string;
   repeatedPassword?: string;
+  // lastLogin?: string;
 }

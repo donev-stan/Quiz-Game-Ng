@@ -57,7 +57,7 @@
         </mat-card>
 
         <mat-card class="actions-edit" *ngIf="editMode">
-            <button mat-raised-button color="warn">Cancel</button>
+            <button mat-raised-button color="warn" [routerLink]="['/profile', id]">Cancel</button>
             <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid">Save</button>
         </mat-card>
 

@@ -44,7 +44,7 @@ export class HintsComponent implements OnInit {
         if (response) {
           this.dialogService.openDialog({
             title: 'Ask The Audience',
-            text: `<hr>`,
+            text: ``,
             audienceResponse: response,
             actions: {
               main: {

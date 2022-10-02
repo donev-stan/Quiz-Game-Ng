@@ -81,7 +81,7 @@ export class FirebaseService {
   }
 
   register(registerData: IRegisterData) {
-    registerData.avatar = `https://robohash.org/${registerData.username}`;
+    registerData.avatar = `https://robohash.org/${Math.random()}`;
     return this.firestore.collection('users').add(registerData);
   }
 
@@ -90,7 +90,10 @@ export class FirebaseService {
       .collection('users')
       .doc(userId)
       .valueChanges({ idField: 'id' })
-      .pipe(tap((user: any) => console.log(user)));
+      .pipe(
+        map((user) => ({ ...user, lastLogin: new Date() })),
+        tap((user: any) => console.log(user))
+      );
   }
 
   getForbiddenData(): Observable<IForbiddenUserData[]> {
