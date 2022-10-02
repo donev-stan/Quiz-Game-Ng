@@ -4,8 +4,9 @@
         <p style="font-size: larger" [innerHTML]="data.text"></p>
 
         <p *ngIf="data.audienceResponse">
-            <span *ngFor="let pair of audienceResponseArray(data.audienceResponse)">
-                <b> {{ pair[1] }}% </b> -- <i> {{ pair[0] }} </i> <br>
+            <span *ngFor="let pair of audienceResponseArray(data.audienceResponse)"
+                [innerHTML]="'<b>' + pair[1] + '% -- </b> <i>' + pair[0] + '</i> <br>' ">
+                <!-- <b> {{ pair[1] }}% </b> -- <i> {{ pair[0] }} </i> <br> -->
             </span>
         </p>
 
