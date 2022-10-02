@@ -1,2 +1,27 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<mat-drawer-container>
+    <mat-drawer #drawer mode="over">
+        <div class="menu-links" (click)="closeSidenav()">
+            <button mat-button color="primary" routerLinkActive="mat-raised-button"
+                routerLink="/home">Dashboard</button>
+            <button mat-button color="primary" routerLink="/scoreboard" routerLinkActive="mat-raised-button">
+                Scoreboard
+            </button>
+            <button mat-button color="primary" routerLink="/quiz-game" routerLinkActive="mat-raised-button">
+                <img src="/assets/images/quiz-icon.png">
+                <span> Quiz </span>
+            </button>
+            <button mat-button color="primary" routerLinkActive="mat-raised-button">
+                <img src="/assets/images/hangman-logo.png">
+                <span> Hangman </span>
+            </button>
+            <button mat-button color="primary" routerLinkActive="mat-raised-button">
+                <img src="/assets/images/ttt-logo.png">
+                <span>TicTacToe</span>
+            </button>
+        </div>
+    </mat-drawer>
+
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+
+</mat-drawer-container>

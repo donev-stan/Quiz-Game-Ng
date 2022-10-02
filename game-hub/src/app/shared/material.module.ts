@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [],
@@ -34,6 +35,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatInputModule,
     MatChipsModule,
     MatTabsModule,
+    MatSidenavModule,
   ],
 })
 export class MaterialModule {}

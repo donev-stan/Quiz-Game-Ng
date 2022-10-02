@@ -1,0 +1,21 @@
+mat-drawer {
+  width: 100%;
+}
+
+mat-drawer-container {
+  background: #eeeeee;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 50px;
+}
+
+button {
+  img {
+    width: 25px;
+    margin-right: 10px;
+  }
+}

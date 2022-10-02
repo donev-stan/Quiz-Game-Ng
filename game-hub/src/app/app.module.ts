@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire/compat';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material.module';
@@ -15,11 +17,10 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { environment } from '../environments/environment';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
-import { AngularFireModule } from '@angular/fire/compat';
 import { UsersListComponent } from './scoreboard/users-list/users-list.component';
 import { UserRecordsComponent } from './scoreboard/user-records/user-records.component';
+import { SidenavService } from './services/sidenav.service';
 
 @NgModule({
   declarations: [

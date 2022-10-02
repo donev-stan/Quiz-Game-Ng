@@ -21,4 +21,9 @@ body {
 
 .container {
   display: flex;
+  height: 100vh;
+}
+
+mat-card {
+  height: fit-content;
 }

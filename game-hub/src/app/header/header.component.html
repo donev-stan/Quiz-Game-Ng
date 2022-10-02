@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button>
+    <button mat-icon-button (click)="toggleSidenav()">
         <!-- <mat-icon>games</mat-icon> -->
         <mat-icon>videogame_asset</mat-icon>
     </button>
@@ -8,19 +8,21 @@
 
     <span class="spacer"></span>
 
-    <a mat-button routerLink="/home">Dashboard</a>
-    <a mat-button routerLink="/scoreboard">Scoreboard</a>
-    <button mat-button [matMenuTriggerFor]="menu">Games</button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/quiz-game" class="game-btn">
-            <img src="/assets/images/quiz-icon.png" width="20px"> <span> Quiz </span>
-        </button>
-        <button mat-menu-item class="game-btn">
-            <img src="/assets/images/hangman-logo.png" width="20px"> <span> Hangman </span>
-        </button>
-        <button mat-menu-item class="game-btn"><img src="/assets/images/ttt-logo.png" width="20px"> <span> TicTacToe
-            </span></button>
-    </mat-menu>
+    <div class="menu-links">
+        <a mat-button routerLink="/home">Dashboard</a>
+        <a mat-button routerLink="/scoreboard">Scoreboard</a>
+        <button mat-button [matMenuTriggerFor]="menu">Games</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/quiz-game" class="game-btn">
+                <img src="/assets/images/quiz-icon.png" width="20px"> <span> Quiz </span>
+            </button>
+            <button mat-menu-item class="game-btn">
+                <img src="/assets/images/hangman-logo.png" width="20px"> <span> Hangman </span>
+            </button>
+            <button mat-menu-item class="game-btn"><img src="/assets/images/ttt-logo.png" width="20px"> <span> TicTacToe
+                </span></button>
+        </mat-menu>
+    </div>
 
     <span class="spacer"></span>
 
@@ -47,7 +49,7 @@
             </button>
         </mat-menu> -->
 
-        <button mat-button [routerLink]="['/profile', loggedUser?.id]">
+        <button mat-button [routerLink]="['/profile', loggedUser?.id]" class="profile-btn">
             <i style="text-decoration: underline;"> Hi, {{loggedUser?.username}}!</i>
             <img [src]="loggedUser?.avatar" class="avatar">
         </button>
