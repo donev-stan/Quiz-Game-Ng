@@ -1,0 +1,5 @@
+<div class="word">
+  <mat-card class="letter" *ngFor="let letter of word">
+    {{ letter.guessed ? [letter.name | uppercase] : "" }}
+  </mat-card>
+</div>

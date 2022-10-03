@@ -1,0 +1,10 @@
+<div class="keyboard">
+  <mat-card
+    appLetterGuess
+    class="letter"
+    *ngFor="let letter of alphabet"
+    [letterClicked]="letter"
+  >
+    {{ letter | uppercase }}
+  </mat-card>
+</div>

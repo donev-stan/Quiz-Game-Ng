@@ -20,7 +20,7 @@ import { environment } from '../environments/environment';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersListComponent } from './scoreboard/users-list/users-list.component';
 import { UserRecordsComponent } from './scoreboard/user-records/user-records.component';
-import { SidenavService } from './services/sidenav.service';
+import { HangmanGameModule } from './hangman-game/hangman-game.module';
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import { SidenavService } from './services/sidenav.service';
     MaterialModule,
     HttpClientModule,
     QuizGameModule,
+    HangmanGameModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
