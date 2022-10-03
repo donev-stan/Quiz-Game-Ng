@@ -11,6 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { CanPlayGuard } from './shared/guards/can-play.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { UserRecordsComponent } from './scoreboard/user-records/user-records.component';
+import { HangmanGameComponent } from './hangman-game/hangman-game.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,12 @@ const routes: Routes = [
     component: QuizGameComponent,
     canActivate: [CanPlayGuard],
     canDeactivate: [CanLeaveGameGuard],
+  },
+  {
+    path: 'hangman-game',
+    component: HangmanGameComponent,
+    canActivate: [CanPlayGuard],
+    // canDeactivate: [CanLeaveGameGuard],
   },
   {
     path: '**',
