@@ -1,0 +1,24 @@
+.container {
+  flex-direction: column;
+  margin-top: -150px;
+  min-width: 300px;
+
+  padding: 20px;
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+
+  // .mat-form-field {
+  //   width: 100%;
+  // }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .winnings-text {
+    text-shadow: 0px 0px 1px #000000;
+    color: #ff9800;
+  }
+}

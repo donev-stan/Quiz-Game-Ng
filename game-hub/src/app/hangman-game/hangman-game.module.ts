@@ -7,6 +7,7 @@ import { HangmanImgComponent } from './hangman-img/hangman-img.component';
 import { WordComponent } from './word/word.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
 import { LetterGuessDirective } from './keyboard/letter-guess.directive';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { LetterGuessDirective } from './keyboard/letter-guess.directive';
     WordComponent,
     KeyboardComponent,
     LetterGuessDirective,
+    DialogComponent,
   ],
   imports: [CommonModule, MaterialModule, RoutingModule],
 })

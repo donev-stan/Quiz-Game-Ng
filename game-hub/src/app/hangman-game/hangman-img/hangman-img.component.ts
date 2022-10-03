@@ -8,12 +8,17 @@ import { RandomWordService } from '../services/random-word.service';
 })
 export class HangmanImgComponent implements OnInit {
   tries: number = 10;
+  gameWon: boolean = false;
 
   constructor(private rndWordService: RandomWordService) {}
 
   ngOnInit(): void {
     this.rndWordService.triesSubject.subscribe(
       (triesCount) => (this.tries = triesCount)
+    );
+
+    this.rndWordService.gameWon.subscribe(
+      (gameWon) => (this.gameWon = gameWon)
     );
   }
 }

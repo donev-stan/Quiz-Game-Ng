@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import {
   Directive,
   ElementRef,
@@ -5,6 +6,7 @@ import {
   Input,
   Renderer2,
 } from '@angular/core';
+import { DialogComponent } from '../dialog/dialog.component';
 import { RandomWordService } from '../services/random-word.service';
 
 @Directive({
@@ -19,7 +21,8 @@ export class LetterGuessDirective {
   constructor(
     private rndWordService: RandomWordService,
     private el: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    public dialog: Dialog
   ) {}
 
   ngOnInit(): void {
@@ -27,12 +30,41 @@ export class LetterGuessDirective {
   }
 
   @HostListener('click') onLetterClick() {
+    if (!this.word.length) return;
+    if (this.rndWordService.triesLeft === 0) return;
+
     const foundLetter = this.word.find(
       (letter: any) => letter.name === this.letterClicked && !letter.guessed
     );
 
     if (foundLetter) {
       foundLetter.guessed = true;
+
+      const stillToGuess = this.word.filter(
+        (letter: any) => !letter.guessed
+      ).length;
+
+      if (!stillToGuess) {
+        // endgame --- WIN
+        this.dialog.open(DialogComponent, {
+          data: {
+            title: 'Congratulations!',
+            text: `You have guessed the word.`,
+            actions: {
+              main: {
+                text: 'Start Over',
+                reset: true,
+              },
+              secondary: {
+                text: 'Exit',
+                exitGame: true,
+              },
+            },
+          },
+        });
+
+        this.rndWordService.gameWon.next(true);
+      }
     } else {
       if (this.disabledLetters.includes(this.letterClicked)) return;
       this.disabledLetters.push(this.letterClicked);
@@ -46,7 +78,23 @@ export class LetterGuessDirective {
 
       this.rndWordService.triesLeft -= 1;
       if (this.rndWordService.triesLeft <= 0) {
-        // endgame
+        // endgame -- LOSE
+        this.dialog.open(DialogComponent, {
+          data: {
+            title: 'Game Over!',
+            text: `Sorry, you were hanged.`,
+            actions: {
+              main: {
+                text: 'Start Over',
+                reset: true,
+              },
+              secondary: {
+                text: 'Exit',
+                exitGame: true,
+              },
+            },
+          },
+        });
       }
       this.rndWordService.triesSubject.next(this.rndWordService.triesLeft);
     }

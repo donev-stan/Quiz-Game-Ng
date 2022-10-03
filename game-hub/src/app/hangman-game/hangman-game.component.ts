@@ -9,13 +9,11 @@ import { RandomWordService } from './services/random-word.service';
 export class HangmanGameComponent implements OnInit {
   hint: string = '';
 
-  constructor(private rndWordService: RandomWordService) {}
+  constructor(private rndWordService: RandomWordService) {
+    this.rndWordService.hintSubject.subscribe((hint) => (this.hint = hint));
+  }
 
   ngOnInit(): void {
     this.rndWordService.getRandomWord();
-
-    this.rndWordService.hintSubject.subscribe(
-      (hintMsg: string) => (this.hint = hintMsg)
-    );
   }
 }
