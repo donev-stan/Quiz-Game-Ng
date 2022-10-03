@@ -7,9 +7,15 @@ import { RandomWordService } from './services/random-word.service';
   styleUrls: ['./hangman-game.component.scss'],
 })
 export class HangmanGameComponent implements OnInit {
+  hint: string = '';
+
   constructor(private rndWordService: RandomWordService) {}
 
   ngOnInit(): void {
     this.rndWordService.getRandomWord();
+
+    this.rndWordService.hintSubject.subscribe(
+      (hintMsg: string) => (this.hint = hintMsg)
+    );
   }
 }

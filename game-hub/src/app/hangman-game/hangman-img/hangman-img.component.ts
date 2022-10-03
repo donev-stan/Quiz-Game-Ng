@@ -12,7 +12,7 @@ export class HangmanImgComponent implements OnInit {
   constructor(private rndWordService: RandomWordService) {}
 
   ngOnInit(): void {
-    this.rndWordService.tries.subscribe(
+    this.rndWordService.triesSubject.subscribe(
       (triesCount) => (this.tries = triesCount)
     );
   }

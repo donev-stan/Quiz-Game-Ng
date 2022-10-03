@@ -13,6 +13,7 @@
 >
   <!-- BASE 1 -->
   <line
+    *ngIf="tries < 14"
     id="base1"
     fill="none"
     stroke="#000000"
@@ -26,6 +27,7 @@
 
   <!-- BASE 2 -->
   <line
+    *ngIf="tries < 13"
     id="base2"
     fill="none"
     stroke="#000000"
@@ -39,6 +41,7 @@
 
   <!-- BASE 3 -->
   <line
+    *ngIf="tries < 12"
     id="base3"
     fill="none"
     stroke="#000000"
@@ -51,7 +54,8 @@
   />
 
   <!-- SHORT ROPE -->
-  <!-- <line
+  <line
+    *ngIf="tries < 11"
     id="base4"
     fill="none"
     stroke="#000000"
@@ -61,7 +65,7 @@
     y1="59.357"
     x2="72.797"
     y2="35.336"
-  /> -->
+  />
 
   <!-- LONG ROPE -->
   <line
@@ -356,3 +360,7 @@
     </g>
   </g> -->
 </svg>
+
+<h3>
+  Tries Left: <b>{{ tries }}</b>
+</h3>

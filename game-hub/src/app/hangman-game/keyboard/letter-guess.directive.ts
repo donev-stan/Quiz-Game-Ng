@@ -14,6 +14,8 @@ export class LetterGuessDirective {
   private word: any = [];
   @Input() letterClicked: string = '';
 
+  private disabledLetters: string[] = [];
+
   constructor(
     private rndWordService: RandomWordService,
     private el: ElementRef,
@@ -25,30 +27,28 @@ export class LetterGuessDirective {
   }
 
   @HostListener('click') onLetterClick() {
-    console.log('Im here');
-
     const foundLetter = this.word.find(
       (letter: any) => letter.name === this.letterClicked && !letter.guessed
     );
 
     if (foundLetter) {
       foundLetter.guessed = true;
-
-      // this.renderer.setStyle(
-      //   this.el.nativeElement,
-      //   'background-color',
-      //   'lightseagreen'
-      // );
     } else {
+      if (this.disabledLetters.includes(this.letterClicked)) return;
+      this.disabledLetters.push(this.letterClicked);
+
+      this.renderer.setStyle(this.el.nativeElement, 'color', 'white');
       this.renderer.setStyle(
         this.el.nativeElement,
         'background-color',
         '#F44336'
       );
-      this.renderer.setStyle(this.el.nativeElement, 'color', 'white');
 
-      this.rndWordService.tries.next((this.rndWordService.triesCount -= 1));
-      // wrong letter clicked => life -= 1
+      this.rndWordService.triesLeft -= 1;
+      if (this.rndWordService.triesLeft <= 0) {
+        // endgame
+      }
+      this.rndWordService.triesSubject.next(this.rndWordService.triesLeft);
     }
   }
 }
