@@ -110,6 +110,7 @@ export class FirebaseService {
 
   register(registerData: IRegisterData) {
     registerData.avatar = `https://robohash.org/${Math.random()}`;
+    // registerData.username = registerData.username.trim();
     return this.firestore.collection('users').add(registerData);
   }
 
