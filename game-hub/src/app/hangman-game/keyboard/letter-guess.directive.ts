@@ -80,7 +80,7 @@ export class LetterGuessDirective {
         });
 
         this.rndWordService.gameWon.next(true);
-        this.rndWordService.canLeave.next(true);
+        // this.rndWordService.canLeave.next(true);
       }
     } else {
       if (this.disabledLetters.includes(this.letterClicked)) return;
@@ -115,7 +115,7 @@ export class LetterGuessDirective {
         });
       }
       this.rndWordService.triesSubject.next(this.rndWordService.triesLeft);
-      this.rndWordService.canLeave.next(true);
+      // this.rndWordService.canLeave.next(true);
     }
   }
 }
