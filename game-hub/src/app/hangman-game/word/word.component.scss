@@ -3,6 +3,8 @@
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
+  min-height: 20px;
+  min-width: 300px;
 
   .letter {
     background-color: #00bcd4;
@@ -11,4 +13,9 @@
     width: 20px;
     height: 20px;
   }
+}
+
+.loader-div {
+  display: flex;
+  width: 100%;
 }

@@ -1,4 +1,7 @@
 <div class="word-container">
+  <div class="loader-div" *ngIf="!word.length">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
   <mat-card class="letter" *ngFor="let letter of word">
     {{ letter.guessed ? [letter.name | uppercase] : "" }}
   </mat-card>
