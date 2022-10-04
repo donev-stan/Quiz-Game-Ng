@@ -31,6 +31,14 @@
   }
 }
 
+@media (max-width: 635px) {
+  .container-main {
+    mat-card {
+      gap: 0px;
+    }
+  }
+}
+
 @media (max-width: 300px) {
   .container-hangman-img {
     mat-card {

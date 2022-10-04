@@ -28,29 +28,29 @@ export class RandomWordService {
   constructor(private http: HttpClient) {}
 
   getRandomWord(): void {
-    // this.http
-    //   .get(this.baseUrl, {
-    //     headers: this.headers,
-    //   })
-    //   .pipe(
-    //     tap((dataArr: any) => (this.hint = dataArr[0].definition)),
-    //     map((data: any) =>
-    //       data.flatMap((wordData: any) =>
-    //         wordData.word.split('').map((letter: string) => ({
-    //           name: letter.toLowerCase(),
-    //           guessed: false,
-    //         }))
-    //       )
-    //     ),
-    //     tap((res) => console.log(res))
-    //   )
-    //   .subscribe((word: []) => {
-    //     this.word.next(word);
-    //     this.triesLeft = 10;
-    //     this.triesSubject.next(this.triesLeft);
-    //     this.hintSubject.next(this.hint);
-    //     this.gameWon.next(false);
-    //     this.canLeave.next(false);
-    //   });
+    this.http
+      .get(this.baseUrl, {
+        headers: this.headers,
+      })
+      .pipe(
+        tap((dataArr: any) => (this.hint = dataArr[0].definition)),
+        map((data: any) =>
+          data.flatMap((wordData: any) =>
+            wordData.word.split('').map((letter: string) => ({
+              name: letter.toLowerCase(),
+              guessed: false,
+            }))
+          )
+        ),
+        tap((res) => console.log(res))
+      )
+      .subscribe((word: []) => {
+        this.word.next(word);
+        this.triesLeft = 10;
+        this.triesSubject.next(this.triesLeft);
+        this.hintSubject.next(this.hint);
+        this.gameWon.next(false);
+        this.canLeave.next(false);
+      });
   }
 }
