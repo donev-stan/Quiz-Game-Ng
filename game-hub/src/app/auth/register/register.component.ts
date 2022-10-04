@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
         username: new FormControl(null, [
           Validators.required,
           this.validateTakenUsername.bind(this),
-          Validators.pattern('^[A-Za-z][A-Za-z0-9]*$'),
+          Validators.pattern('^[a-z][a-z0-9]*$'),
         ]),
       }),
       securityCredentials: new FormGroup({
