@@ -1,11 +1,17 @@
 <div class="keyboard-container">
-  <!-- <div class="alphabet">
-    <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" *ngFor="let letter of alphabet" [letterClicked]="letter">
+  <!-- <div *ngIf="quertyStyle; then querty else alphabet"></div> -->
+
+  <!-- <ng-template #alphabet> -->
+  <div class="alphabet" *ngIf="!quertyStyle">
+    <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" *ngFor="let letter of alphabet"
+      [letterClicked]="letter">
       {{ letter | uppercase }}
     </mat-card>
-  </div> -->
+  </div>
+  <!-- </ng-template> -->
 
-  <div class="querty">
+  <!-- <ng-template #querty> -->
+  <div class="querty" *ngIf="quertyStyle">
     <div class="row">
       <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="q"> Q </mat-card>
       <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="w"> W </mat-card>
@@ -39,5 +45,6 @@
       <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="m"> M </mat-card>
     </div>
   </div>
+  <!-- </ng-template> -->
 
 </div>

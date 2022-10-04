@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { IUser } from '../models/user';
 import { FirebaseService } from '../services/firebase.service';
 import { SidenavService } from '../services/sidenav.service';
@@ -32,5 +32,10 @@ export class HeaderComponent implements OnInit {
     if (this.screenWidth < 768) {
       this.sidenav.toggle();
     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.screenWidth = window.innerWidth;
   }
 }

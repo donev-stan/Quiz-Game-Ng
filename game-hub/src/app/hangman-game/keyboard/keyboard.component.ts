@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RandomWordService } from '../services/random-word.service';
 
 @Component({
@@ -38,9 +38,17 @@ export class KeyboardComponent implements OnInit {
 
   word: any = [];
 
+  quertyStyle: boolean = true;
+
   constructor(private rndWordService: RandomWordService) {}
 
   ngOnInit(): void {
     this.rndWordService.word.subscribe((word) => (this.word = word));
+    this.quertyStyle = window.innerWidth > 635;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.quertyStyle = window.innerWidth > 635;
   }
 }

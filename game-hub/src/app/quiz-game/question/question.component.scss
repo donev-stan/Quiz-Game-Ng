@@ -3,10 +3,11 @@
   flex: 2;
   flex-direction: column;
 
-  min-width: 550px;
+  min-width: 300px;
 
   mat-card {
     font-size: larger;
+    text-align: center;
   }
 
   .loader-div {
@@ -30,7 +31,7 @@
   color: #fff;
 }
 
-@media (max-width: 568px) {
+@media (max-width: 350px) {
   .container {
     min-width: auto;
   }

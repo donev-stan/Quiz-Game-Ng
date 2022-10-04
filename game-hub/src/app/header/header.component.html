@@ -13,16 +13,16 @@
     <a mat-button routerLink="/scoreboard">Scoreboard</a>
     <button mat-button [matMenuTriggerFor]="menu">Games</button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/quiz-game" class="game-btn">
-        <img src="/assets/images/quiz-icon.png" width="20px" />
+      <button mat-menu-item class="game-btn" routerLink="/quiz-game">
+        <img src="/assets/images/quiz-icon.png" />
         <span> Quiz </span>
       </button>
       <button mat-menu-item class="game-btn" routerLink="/hangman-game">
-        <img src="/assets/images/hangman-logo.png" width="20px" />
+        <img src="/assets/images/hangman-logo.png" />
         <span> Hangman </span>
       </button>
-      <button mat-menu-item class="game-btn">
-        <img src="/assets/images/ttt-logo.png" width="20px" />
+      <button mat-menu-item class="game-btn" routerLink="/tic-tac-toe-game">
+        <img src="/assets/images/ttt-logo.png" />
         <span> TicTacToe </span>
       </button>
     </mat-menu>
@@ -34,35 +34,13 @@
 
   <ng-template #loginBlock>
     <a mat-button routerLink="/login">Login</a>
-    <a mat-raised-button routerLink="/register" class="register-btn"
-      >Register</a
-    >
+    <a mat-raised-button routerLink="/register" class="register-btn">Register</a>
   </ng-template>
 
   <ng-template #loggedInBlock>
-    <!-- <button mat-button [matMenuTriggerFor]="menu">
-            <i> Hi, {{loggedUser?.username}}!</i>
-            <img [src]="loggedUser?.avatar" class="avatar"></button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item [routerLink]="['/profile', loggedUser?.id]">
-                <mat-icon>person</mat-icon> Profile
-            </button>
-            <button mat-menu-item>
-                <mat-icon>edit</mat-icon> Edit
-            </button>
-            <button mat-menu-item>
-                <mat-icon>delete</mat-icon>Delete
-            </button>
-        </mat-menu> -->
-
-    <button
-      mat-button
-      [routerLink]="['/profile', loggedUser?.id]"
-      class="profile-btn"
-    >
+    <button mat-button [routerLink]="['/profile', loggedUser?.id]" class="profile-btn">
       <i style="text-decoration: underline"> Hi, {{ loggedUser?.username }}!</i>
       <img [src]="loggedUser?.avatar" class="avatar" />
     </button>
-    <!-- <button mat-raised-button (click)="onLogout()">Logout</button> -->
   </ng-template>
 </mat-toolbar>
