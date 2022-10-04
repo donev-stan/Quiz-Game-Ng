@@ -26,7 +26,16 @@ export class LetterGuessDirective {
   ) {}
 
   ngOnInit(): void {
-    this.rndWordService.word.subscribe((word) => (this.word = word));
+    this.rndWordService.word.subscribe((word) => {
+      this.word = word;
+      this.renderer.setStyle(this.el.nativeElement, 'color', 'black');
+      this.renderer.setStyle(
+        this.el.nativeElement,
+        'background-color',
+        'white'
+      );
+      this.disabledLetters = [];
+    });
   }
 
   @HostListener('click') onLetterClick() {
@@ -45,8 +54,15 @@ export class LetterGuessDirective {
       ).length;
 
       if (!stillToGuess) {
+        console.log(this.disabledLetters);
+
+        this.disabledLetters.forEach((letter) => {
+          console.log(letter);
+        });
+
         // endgame --- WIN
         this.dialog.open(DialogComponent, {
+          disableClose: true,
           data: {
             title: 'Congratulations!',
             text: `You have guessed the word.`,
@@ -80,6 +96,7 @@ export class LetterGuessDirective {
       if (this.rndWordService.triesLeft <= 0) {
         // endgame -- LOSE
         this.dialog.open(DialogComponent, {
+          disableClose: true,
           data: {
             title: 'Game Over!',
             text: `Sorry, you were hanged.`,

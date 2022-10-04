@@ -43,6 +43,4 @@ export class KeyboardComponent implements OnInit {
   ngOnInit(): void {
     this.rndWordService.word.subscribe((word) => (this.word = word));
   }
-
-  onLetterClick(letterClicked: string): void {}
 }

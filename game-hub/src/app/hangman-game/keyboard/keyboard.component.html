@@ -1,10 +1,43 @@
-<div class="keyboard">
-  <mat-card
-    appLetterGuess
-    class="letter"
-    *ngFor="let letter of alphabet"
-    [letterClicked]="letter"
-  >
-    {{ letter | uppercase }}
-  </mat-card>
+<div class="keyboard-container">
+  <!-- <div class="alphabet">
+    <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" *ngFor="let letter of alphabet" [letterClicked]="letter">
+      {{ letter | uppercase }}
+    </mat-card>
+  </div> -->
+
+  <div class="querty">
+    <div class="row">
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="q"> Q </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="w"> W </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="e"> E </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="r"> R </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="t"> T </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="y"> Y </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="u"> U </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="i"> I </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="o"> O </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="p"> P </mat-card>
+    </div>
+    <div class="row">
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="a"> A </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="s"> S </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="d"> D </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="f"> F </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="g"> G </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="h"> H </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="j"> J </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="k"> K </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="l"> L </mat-card>
+    </div>
+    <div class="row">
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="z"> Z </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="x"> X </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="c"> C </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="v"> V </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="b"> B </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="n"> N </mat-card>
+      <mat-card appLetterGuess [class.mat-elevation-z3]="true" class="letter" letterClicked="m"> M </mat-card>
+    </div>
+  </div>
+
 </div>

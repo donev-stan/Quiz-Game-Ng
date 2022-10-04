@@ -21,6 +21,8 @@ body {
 
 .container {
   display: flex;
+  max-width: 1600px;
+  margin: auto;
 }
 
 mat-card {
