@@ -43,6 +43,7 @@ export class RegisterComponent implements OnInit {
         username: new FormControl(null, [
           Validators.required,
           this.validateTakenUsername.bind(this),
+          Validators.pattern('^[A-Za-z][A-Za-z0-9]*$'),
         ]),
       }),
       securityCredentials: new FormGroup({
@@ -50,6 +51,9 @@ export class RegisterComponent implements OnInit {
           Validators.email,
           Validators.required,
           this.validateTakenEmail.bind(this),
+          Validators.pattern(
+            /^[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i
+          ),
         ]),
         password: new FormControl(null, [
           Validators.minLength(6),
@@ -75,7 +79,19 @@ export class RegisterComponent implements OnInit {
     return null;
   }
 
+  // validateNoWhitespace(control: FormControl) {
+  //   const isWhitespace = (control.value || '').trim().length === 0;
+
+  //   if (isWhitespace) {
+  //     return { whitespace: true };
+  //   }
+  //   return null;
+  // }
+
   onSubmit() {
+    this.trimData();
+    console.log(this.userForm.value);
+
     if (this.userForm.valid) {
       console.log(this.userForm.value);
 
@@ -97,8 +113,32 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  trimData(): void {
+    // Trim username
+    this.userForm
+      .get('basicCredentials.username')
+      ?.patchValue(
+        this.userForm.get('basicCredentials.username')!.value.trim()
+      );
+
+    // Trim email
+    this.userForm
+      .get('securityCredentials.email')
+      ?.patchValue(
+        this.userForm.get('securityCredentials.email')!.value.trim()
+      );
+
+    // Trim password
+    this.userForm
+      .get('securityCredentials.password')
+      ?.patchValue(
+        this.userForm.get('securityCredentials.password')!.value.trim()
+      );
+  }
+
+  // Only works with keyboard not on mobile devices
   preventSpace(event: { keyCode: number }): boolean {
-    if (event.keyCode === 32) return false; // 32 is space key
+    // if (event.keyCode === 32) return false; // 32 is space key
     return true;
   }
 }

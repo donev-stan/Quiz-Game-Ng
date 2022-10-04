@@ -19,9 +19,13 @@ export class CanPlayGuard implements CanActivate, CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
+    // console.log('CAN PLAY GUARD');
+    // console.log(route);
+    // console.log(state);
+
     if (this.firebase.isLoggedUser()) return true;
 
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     return false;
   }
 
