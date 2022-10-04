@@ -38,6 +38,10 @@ export class LetterGuessDirective {
     });
   }
 
+  // @HostListener('window:keyup', ['$event']) onKeyDown(event: KeyboardEvent) {
+  //   console.log(event);
+  // }
+
   @HostListener('click') onLetterClick() {
     if (!this.word.length) return;
     if (this.rndWordService.triesLeft === 0) return;
@@ -54,12 +58,6 @@ export class LetterGuessDirective {
       ).length;
 
       if (!stillToGuess) {
-        console.log(this.disabledLetters);
-
-        this.disabledLetters.forEach((letter) => {
-          console.log(letter);
-        });
-
         // endgame --- WIN
         this.dialog.open(DialogComponent, {
           disableClose: true,
@@ -80,7 +78,6 @@ export class LetterGuessDirective {
         });
 
         this.rndWordService.gameWon.next(true);
-        // this.rndWordService.canLeave.next(true);
       }
     } else {
       if (this.disabledLetters.includes(this.letterClicked)) return;
@@ -115,7 +112,6 @@ export class LetterGuessDirective {
         });
       }
       this.rndWordService.triesSubject.next(this.rndWordService.triesLeft);
-      // this.rndWordService.canLeave.next(true);
     }
   }
 }
