@@ -6,7 +6,7 @@ import { QuizGameComponent } from './quiz-game/quiz-game.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
-import { CanLeaveGameGuard } from './quiz-game/can-leave-game.guard';
+import { CanLeaveGameGuard } from './shared/guards/can-leave-game.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { CanPlayGuard } from './shared/guards/can-play.guard';
 import { AuthGuard } from './shared/guards/auth.guard';
@@ -64,7 +64,7 @@ const routes: Routes = [
     path: 'hangman-game',
     component: HangmanGameComponent,
     canActivate: [CanPlayGuard],
-    // canDeactivate: [CanLeaveGameGuard],
+    canDeactivate: [CanLeaveGameGuard],
   },
   {
     path: '**',

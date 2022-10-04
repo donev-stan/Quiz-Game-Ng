@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CanComponentDeactivate } from './can-leave-game.guard';
+import { CanComponentDeactivate } from '../shared/guards/can-leave-game.guard';
 import { QuestionsDataService } from './services/questions-data.service';
 
 @Component({

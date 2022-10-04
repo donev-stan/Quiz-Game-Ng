@@ -23,6 +23,8 @@ export class RandomWordService {
 
   gameWon: Subject<boolean> = new Subject();
 
+  canLeave: Subject<boolean> = new Subject();
+
   constructor(private http: HttpClient) {}
 
   getRandomWord(): void {
@@ -48,6 +50,7 @@ export class RandomWordService {
         this.triesSubject.next(this.triesLeft);
         this.hintSubject.next(this.hint);
         this.gameWon.next(false);
+        this.canLeave.next(false);
       });
   }
 }
