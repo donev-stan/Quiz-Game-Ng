@@ -88,19 +88,22 @@ export class FirebaseService {
       .get();
   }
 
-  setLoggedUser(userData: IUser | string): void {
-    const setUser = (userData: IUser) => {
-      this.loggedUserNotification.next(userData);
-      localStorage.setItem('loggedInUser', JSON.stringify(userData));
-    };
+  setLoggedUser(userData: IUser | string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const setUser = (userData: IUser) => {
+        this.loggedUserNotification.next(userData);
+        localStorage.setItem('loggedInUser', JSON.stringify(userData));
+        resolve(true);
+      };
 
-    if (typeof userData === 'string') {
-      this.getUserByID(userData).subscribe((user: IUser) => {
-        setUser(user);
-      });
-    } else {
-      setUser(userData);
-    }
+      if (typeof userData === 'string') {
+        this.getUserByID(userData).subscribe((user: IUser) => {
+          setUser(user);
+        });
+      } else {
+        setUser(userData);
+      }
+    });
   }
 
   logout(): void {

@@ -4,7 +4,7 @@
     </mat-card>
 
     <mat-card>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
 
             <div>
                 <mat-form-field appearance="fill">

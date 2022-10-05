@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   hidePass: boolean = true;
   error: boolean = false;
-  private returnUrl: string = '/home';
+  private returnUrl: string = '';
 
   constructor(
     private firebase: FirebaseService,
@@ -30,17 +30,18 @@ export class LoginComponent implements OnInit {
       ]),
     });
 
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
   }
 
-  onSubmit() {
+  onSubmit(event: Event) {
     this.trimData();
 
     if (this.loginForm.valid) {
       this.firebase.login(this.loginForm.value).subscribe((data) => {
         if (!data.empty) {
-          this.firebase.setLoggedUser(data.docs[0].id);
-          this.router.navigateByUrl(this.returnUrl);
+          this.firebase.setLoggedUser(data.docs[0].id).then(() => {
+            this.router.navigateByUrl(this.returnUrl);
+          });
         } else {
           this.error = true;
         }
