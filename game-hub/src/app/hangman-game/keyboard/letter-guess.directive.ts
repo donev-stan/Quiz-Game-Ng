@@ -97,7 +97,9 @@ export class LetterGuessDirective {
           disableClose: true,
           data: {
             title: 'Game Over!',
-            text: `Sorry, you were hanged.`,
+            text: `Sorry, you were hanged. <br/> Your word was: <b>${this.word
+              .map((letter: any) => letter.name)
+              .join('')}</b>.`,
             actions: {
               main: {
                 text: 'Start Over',
