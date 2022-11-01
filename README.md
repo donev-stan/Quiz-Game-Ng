@@ -4,9 +4,6 @@ A couple of games grouped in one project app where authentication is needed in o
 ## Dashboard
 ![image](https://user-images.githubusercontent.com/77002111/199254591-0a1a1385-740e-4e91-aa22-52797809a838.png)
 
-## Dashboard Mobile View
-![image](https://user-images.githubusercontent.com/77002111/199256477-da294b1f-2788-4ead-ac67-fc7744a3d2cc.png)
-
 ## Scoreboard (In Progress)
 ![image](https://user-images.githubusercontent.com/77002111/199254676-9a886292-556e-4380-9e5d-090c034db138.png)
 
@@ -22,5 +19,10 @@ A couple of games grouped in one project app where authentication is needed in o
 ## Profile Edit View
 ![image](https://user-images.githubusercontent.com/77002111/199256178-bccc1842-daf3-4316-9760-58a1f2d4c329.png)
 
+# Mobile View
+
 ## Navigation Mobile View
 ![image](https://user-images.githubusercontent.com/77002111/199256673-b516e154-502e-4a74-a331-5bc252fa3be0.png)
+
+## Dashboard Mobile View
+![image](https://user-images.githubusercontent.com/77002111/199256477-da294b1f-2788-4ead-ac67-fc7744a3d2cc.png)
