@@ -26,3 +26,17 @@ A couple of games grouped in one project app where authentication is needed in o
 
 ### Dashboard Mobile View
 ![image](https://user-images.githubusercontent.com/77002111/199256477-da294b1f-2788-4ead-ac67-fc7744a3d2cc.png)
+
+### Trivia Game Mobile View
+![image](https://user-images.githubusercontent.com/77002111/199257159-09f75c83-2c31-42b0-9161-b3795cfedae6.png)
+
+### Hangman Game Mobile View
+![image](https://user-images.githubusercontent.com/77002111/199257398-95f66259-54c3-492c-a4b1-b423c0586485.png)
+
+### Profile Mobile View
+![image](https://user-images.githubusercontent.com/77002111/199257481-625bb635-6fc8-4478-8a3a-5346e385d6f2.png)
+
+### Profile Edit Mobile View
+![image](https://user-images.githubusercontent.com/77002111/199257553-2ac08b5f-cf28-4164-9885-acf0a70fbe3c.png)
+
+![image](https://user-images.githubusercontent.com/77002111/199257665-a5e8f699-21e1-4a66-b914-4dd13192cbfa.png)
