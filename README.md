@@ -38,5 +38,3 @@ A couple of games grouped in one project app where authentication is needed in o
 
 ### Profile Edit Mobile View
 ![image](https://user-images.githubusercontent.com/77002111/199257553-2ac08b5f-cf28-4164-9885-acf0a70fbe3c.png)
-
-![image](https://user-images.githubusercontent.com/77002111/199257665-a5e8f699-21e1-4a66-b914-4dd13192cbfa.png)
