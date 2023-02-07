@@ -76,8 +76,6 @@ export class QuestionsDataService {
 
       this.timerValue--;
       this.timerSubject.next(this.timerValue);
-
-      console.log(this.timerValue);
     });
   }
 

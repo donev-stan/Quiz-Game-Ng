@@ -26,11 +26,7 @@ export class HintsComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    // console.log(this.fiftyFiftyBtn);
-    // console.log(this.audienceBtn);
-    // console.log(this.friendBtn);
-  }
+  ngAfterViewInit(): void {}
 
   activateHint(hint: string) {
     switch (hint) {

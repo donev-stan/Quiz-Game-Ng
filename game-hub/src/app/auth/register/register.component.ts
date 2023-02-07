@@ -90,11 +90,8 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.trimData();
-    console.log(this.userForm.value);
 
     if (this.userForm.valid) {
-      console.log(this.userForm.value);
-
       const newUser: IRegisterData = {
         username: this.userForm.value.basicCredentials.username,
         email: this.userForm.value.securityCredentials.email,

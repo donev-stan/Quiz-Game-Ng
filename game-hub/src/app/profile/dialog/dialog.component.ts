@@ -29,8 +29,6 @@ export class DialogComponent implements OnInit {
 
     if (action === 'delete') {
       this.firebase.deleteUser(deleteId!).then((data) => {
-        console.log(data);
-
         if (data) {
           route();
         }

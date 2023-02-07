@@ -41,8 +41,7 @@ export class RandomWordService {
               guessed: false,
             }))
           )
-        ),
-        tap((res) => console.log(res))
+        )
       )
       .subscribe((word: []) => {
         this.word.next(word);

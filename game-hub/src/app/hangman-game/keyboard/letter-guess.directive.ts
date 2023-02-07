@@ -38,10 +38,6 @@ export class LetterGuessDirective {
     });
   }
 
-  // @HostListener('window:keyup', ['$event']) onKeyDown(event: KeyboardEvent) {
-  //   console.log(event);
-  // }
-
   @HostListener('click') onLetterClick() {
     if (!this.word.length) return;
     if (this.rndWordService.triesLeft === 0) return;

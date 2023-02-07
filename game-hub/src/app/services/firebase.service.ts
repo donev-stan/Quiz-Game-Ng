@@ -21,7 +21,6 @@ export class FirebaseService {
       .collection('users')
       .valueChanges({ idField: 'id' })
       .pipe(
-        tap((data) => console.log(data)),
         tap((users: any) => {
           const loggedInUser = JSON.parse(
             localStorage.getItem('loggedInUser')!
@@ -45,16 +44,11 @@ export class FirebaseService {
       .collection('users')
       .valueChanges({ idField: 'id' })
       .pipe(
-        tap((data) => console.log(data)),
         tap((users: any) => {
-          console.log(loggedInUser);
-
           if (loggedInUser) {
             const user = users.find(
               (user: IUser) => user.id === loggedInUser.id
             );
-
-            console.log('I am here and I should not be Here!!');
 
             if (user) this.setLoggedUser(user);
           }

@@ -140,7 +140,6 @@ export class ProfileComponent implements OnInit {
   onSubmit() {
     if (this.userForm.valid && this.validateChanges()) {
       this.firebase.updateUser(this.id, this.userForm.value).then((data) => {
-        console.log(data);
         this.router.navigate(['/profile', this.id]);
       });
     }
