@@ -33,6 +33,7 @@ export class RandomWordService {
         headers: this.headers,
       })
       .pipe(
+        tap(console.log),
         tap((dataArr: any) => (this.hint = dataArr[0].definition)),
         map((data: any) =>
           data.flatMap((wordData: any) =>
@@ -44,6 +45,8 @@ export class RandomWordService {
         )
       )
       .subscribe((word: []) => {
+        console.log(word);
+
         this.word.next(word);
         this.triesLeft = 10;
         this.triesSubject.next(this.triesLeft);
